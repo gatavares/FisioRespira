@@ -65,6 +65,8 @@ export default LoginPage
 
 const styles = StyleSheet.create({
     backicon:{
+        marginTop: -80,
+        marginBottom: 50,
         marginRight: '95%',
     },
     logo: {
