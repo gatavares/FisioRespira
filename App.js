@@ -5,13 +5,15 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import LandingPage from './screens/LandingPage';
 import LoginPage from './screens/LoginPage';
+import RegistoPage from './screens/RegistoPage';
 
 export default function App() {
   return (
     <><IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
       <StatusBar style="auto" />
-      <LoginPage />
+      <RegistoPage />
+      {/* <LoginPage /> */}
       {/* <LandingPage /> */}
       </ApplicationProvider>
     </>
