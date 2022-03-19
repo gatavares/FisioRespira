@@ -28,7 +28,7 @@ const RegistoPage = () => {
         return { checked, onChange: setChecked };
     };
 
-    const basicCheckboxState = useCheckboxState();
+    const successCheckboxState = useCheckboxState();
 
     return (
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%' }}>
@@ -64,9 +64,9 @@ const RegistoPage = () => {
             />
             <CheckBox
                 style={styles.checkbox}
-                status='basic'
-                {...basicCheckboxState}>
-                Aceito os termos.
+                status='basic' 
+                {...successCheckboxState}>
+                Aceito os termos e condições.
             </CheckBox>
 
             <Button style={styles.regist} appearance='filled' status='primary'>
@@ -80,8 +80,7 @@ export default RegistoPage
 
 const styles = StyleSheet.create({
     backicon: {
-        marginTop: -80,
-        marginBottom: 50,
+        marginBottom: 30,
         marginRight: '95%',
     },
     logo: {
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
     },
     checkbox: {
         marginTop: 25,
-        marginRight: '40%',
+        marginRight: '20%',
     },
     regist: {
         backgroundColor: '#283739',
