@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     },
     checkbox: {
         marginTop: 25,
-        marginRight: '20%',
+        marginRight: '25%',
     },
     regist: {
         backgroundColor: '#283739',
