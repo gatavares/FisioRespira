@@ -2,6 +2,7 @@ import { TouchableWithoutFeedback, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Avatar, Layout, Text, Button, Input, CheckBox, Icon, TopNavigationAction } from '@ui-kitten/components';
 
+
 const RegistoPage = () => {
     //inputs variables 
     //valor que esta a ser escrito e sendo atualizado a cada modificacao
@@ -19,10 +20,6 @@ const RegistoPage = () => {
         </TouchableWithoutFeedback>
     );
 
-    const BackIcon = (props) => (
-        <Icon {...props} name='arrow-back' />
-    );
-
     const useCheckboxState = (initialCheck = false) => {
         const [checked, setChecked] = React.useState(initialCheck);
         return { checked, onChange: setChecked };
@@ -31,8 +28,7 @@ const RegistoPage = () => {
     const successCheckboxState = useCheckboxState();
 
     return (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%' }}>
-            <TopNavigationAction icon={BackIcon} style={styles.backicon} />
+        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Avatar source={require('../assets/icon.png')}
                 style={styles.logo} />
 
@@ -79,10 +75,6 @@ const RegistoPage = () => {
 export default RegistoPage
 
 const styles = StyleSheet.create({
-    backicon: {
-        marginBottom: 30,
-        marginRight: '95%',
-    },
     logo: {
         height: 230,
         width: 230,

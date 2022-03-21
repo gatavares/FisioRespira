@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "v0.0.1",
-    "slug": "v0.0.1",
+    "name": "fisio_app",
+    "slug": "fisio_app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

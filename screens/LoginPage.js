@@ -3,7 +3,7 @@ import React from 'react'
 import { Avatar, Layout, Text, Button, Input, Icon, TopNavigationAction } from '@ui-kitten/components';
 
 
-const LoginPage = () => {
+const LoginPage = ({ navigation }) => {
     //inputs variables 
     //valor que esta a ser escrito e sendo atualizado a cada modificacao
     const [valueEmail, setValueEmail] = React.useState('');
@@ -19,13 +19,8 @@ const LoginPage = () => {
         </TouchableWithoutFeedback>
     );
 
-    const BackIcon = (props) => (
-        <Icon {...props} name='arrow-back'/>
-    );
-
     return (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%' }}>
-            <TopNavigationAction icon={BackIcon} style={styles.backicon}/>
+        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Avatar source={require('../assets/icon.png')}
                 style={styles.logo} />
 
@@ -54,7 +49,8 @@ const LoginPage = () => {
             <View style={{ justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%', flexDirection: 'row' }}>
                 <View style={styles.hairlineL} /><Text category='h6' style={styles.loginButtonBelowText1}>ou</Text><View style={styles.hairlineR} />
             </View>
-            <Button style={styles.regist} appearance='filled' status='primary'>
+            <Button style={styles.regist} appearance='filled' status='primary'
+            onPress={() => navigation.navigate('Registar')}>
                 Registar
             </Button>
         </Layout>
@@ -64,11 +60,6 @@ const LoginPage = () => {
 export default LoginPage
 
 const styles = StyleSheet.create({
-    backicon:{
-        marginTop: -80,
-        marginBottom: 50,
-        marginRight: '95%',
-    },
     logo: {
         height: 230,
         width: 230,
