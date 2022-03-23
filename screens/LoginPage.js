@@ -43,7 +43,8 @@ const LoginPage = ({ navigation }) => {
             />
 
 
-            <Button style={styles.login} appearance='filled' status='primary'>
+            <Button style={styles.login} appearance='filled' status='primary'
+            onPress={() => navigation.navigate('Home')}>
                 Login
             </Button>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%', flexDirection: 'row' }}>
