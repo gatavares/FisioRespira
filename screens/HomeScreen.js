@@ -7,8 +7,8 @@ const MenuIcon = (props) => (
   <Icon {...props} name='more-vertical' />
 );
 
-const InfoIcon = (props) => (
-  <Icon {...props} name='info' />
+const DrawerIcon = (props) => (
+  <Icon {...props} name='menu-arrow-outline' />
 );
 
 const LogoutIcon = (props) => (
@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
         anchor={renderMenuAction}
         visible={menuVisible}
         onBackdropPress={toggleMenu}>
-        <MenuItem accessoryLeft={InfoIcon} title='About' />
+        <MenuItem accessoryLeft={DrawerIcon} title='Menu' />
         <MenuItem accessoryLeft={LogoutIcon} title='Logout' />
       </OverflowMenu>
     </React.Fragment>
