@@ -25,7 +25,6 @@ export default function App() {
             <Stack.Screen name="Login" component={LoginPage} />
             <Stack.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
-          
         </NavigationContainer>
         
       </ApplicationProvider>
