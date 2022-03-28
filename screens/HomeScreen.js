@@ -1,4 +1,4 @@
-import { TouchableWithoutFeedback, StyleSheet, View, StatusBar, SafeAreaView} from 'react-native'
+import { TouchableWithoutFeedback, StyleSheet, View, StatusBar, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
 import { Avatar, Layout, Text, Button, Input, Icon, MenuItem, OverflowMenu, TopNavigationAction, TopNavigation } from '@ui-kitten/components';
 
@@ -52,15 +52,55 @@ const HomeScreen = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={styles.NavBar}>
-        <TopNavigation  
+        <TopNavigation
           title={renderTitle}
           accessoryRight={renderOverflowMenuAction}
         />
       </SafeAreaView>
-    
-      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-        <Text>Pagina Principal</Text>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ScrollView style={styles.scrollView}>
+          <Text category='s1' >O QUE É FISIOTERAPIA RESPIRATÓRIA?</Text>
+          <Text category='p2' style={styles.text}>
+            {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Text>
+          <Text category='s1' style={styles.title}>UTILIDADES</Text>
+          <Text category='p2' style={styles.text}>
+            {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Text>
+          <Text category='s1' style={styles.title}>VANTAGENS</Text>
+          <Text category='p2' style={styles.text}>
+            {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Text>
+          <Text category='s1' style={styles.title}>PARA QUEM É RECOMENDADO E DERECIONADO?</Text>
+          <Text category='p2' style={styles.text}>
+            {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Text>
+        </ScrollView>
       </Layout>
     </>
   )
@@ -81,5 +121,11 @@ const styles = StyleSheet.create({
   NavBar: {
     marginTop: StatusBar.currentHeight,
     backgroundColor: '#fff',
+  },
+  scrollView: {
+    margin: '7%',
+  },
+  title: {
+    marginTop: 50,
   },
 })

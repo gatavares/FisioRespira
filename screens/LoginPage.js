@@ -51,7 +51,12 @@ const LoginPage = ({ navigation }) => {
                 <View style={styles.hairlineL} /><Text category='h6' style={styles.loginButtonBelowText1}>ou</Text><View style={styles.hairlineR} />
             </View>
             <Button style={styles.regist} appearance='filled' status='primary'
-            onPress={() => navigation.navigate('Registar')}>
+            onPress={() => {
+                setValueEmail('')
+                setValuePass('')
+                navigation.navigate('Registar') 
+            }
+            }>
                 Registar
             </Button>
         </Layout>
