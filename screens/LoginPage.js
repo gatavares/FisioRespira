@@ -1,6 +1,7 @@
 import { TouchableWithoutFeedback, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Avatar, Layout, Text, Button, Input, Icon, TopNavigationAction } from '@ui-kitten/components';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 const LoginPage = ({ navigation }) => {
@@ -13,6 +14,8 @@ const LoginPage = ({ navigation }) => {
     const toggleSecureEntry = () => {
         setSecureTextEntry(!secureTextEntry);
     };
+    
+
     const renderIcon = (props) => (
         <TouchableWithoutFeedback onPress={toggleSecureEntry}>
             <Icon {...props} fill='#000000' name={secureTextEntry ? 'eye-off' : 'eye'} />
@@ -44,19 +47,33 @@ const LoginPage = ({ navigation }) => {
 
 
             <Button style={styles.login} appearance='filled' status='primary'
-            onPress={() => navigation.navigate('Home')}>
+                onPress={() => {
+                    //login firebase
+                    const auth = getAuth();
+                    signInWithEmailAndPassword(auth, valueEmail, valuePass)
+                        .then((userCredential) => {
+                            // Signed in
+                            console.log(userCredential)
+                            navigation.navigate('Home')
+                            // ...
+                        })
+                        .catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                        });
+                }}>
                 Login
             </Button>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%', flexDirection: 'row' }}>
                 <View style={styles.hairlineL} /><Text category='h6' style={styles.loginButtonBelowText1}>ou</Text><View style={styles.hairlineR} />
             </View>
             <Button style={styles.regist} appearance='filled' status='primary'
-            onPress={() => {
-                setValueEmail('')
-                setValuePass('')
-                navigation.navigate('Registar') 
-            }
-            }>
+                onPress={() => {
+                    setValueEmail('')
+                    setValuePass('')
+                    navigation.navigate('Registar')
+                }
+                }>
                 Registar
             </Button>
         </Layout>
