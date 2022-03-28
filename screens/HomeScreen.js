@@ -60,7 +60,7 @@ const HomeScreen = ({ navigation }) => {
 
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ScrollView style={styles.scrollView}>
-          <Text category='s1' >O QUE É FISIOTERAPIA RESPIRATÓRIA?</Text>
+          <Text category='s1' style={{fontSize: 22,}}>O QUE É FISIOTERAPIA RESPIRATÓRIA?</Text>
           <Text category='p2' style={styles.text}>
             {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -90,7 +90,7 @@ const HomeScreen = ({ navigation }) => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </Text>
-          <Text category='s1' style={styles.title}>PARA QUEM É RECOMENDADO E DERECIONADO?</Text>
+          <Text category='s1' style={styles.title}>PARA QUEM É RECOMENDADO E DIRECIONADO?</Text>
           <Text category='p2' style={styles.text}>
             {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -127,5 +127,9 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 50,
+    fontSize: 22,
+  },
+  text: {
+    fontSize: 17,
   },
 })
