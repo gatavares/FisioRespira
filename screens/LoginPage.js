@@ -1,7 +1,10 @@
 import { TouchableWithoutFeedback, StyleSheet, View } from 'react-native'
 import React from 'react'
-import { Avatar, Layout, Text, Button, Input, Icon, TopNavigationAction } from '@ui-kitten/components';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Avatar, Layout, Card, Modal, Text, Button, Input, Icon, TopNavigationAction } from '@ui-kitten/components'
+
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import '../firebase/firebase'
 
 
 const LoginPage = ({ navigation }) => {
@@ -14,7 +17,11 @@ const LoginPage = ({ navigation }) => {
     const toggleSecureEntry = () => {
         setSecureTextEntry(!secureTextEntry);
     };
-    
+
+    //visibilidade
+    const [visible, setVisible] = React.useState(false);
+
+    //icons
 
     const renderIcon = (props) => (
         <TouchableWithoutFeedback onPress={toggleSecureEntry}>
@@ -53,11 +60,12 @@ const LoginPage = ({ navigation }) => {
                     signInWithEmailAndPassword(auth, valueEmail, valuePass)
                         .then((userCredential) => {
                             // Signed in
-                            console.log(userCredential)
+                            //Fazer registo na cache da app
+
                             navigation.navigate('Home')
-                            // ...
                         })
                         .catch((error) => {
+                            setVisible(true)
                             const errorCode = error.code;
                             const errorMessage = error.message;
                         });
@@ -76,6 +84,27 @@ const LoginPage = ({ navigation }) => {
                 }>
                 Registar
             </Button>
+
+
+            <Modal
+                visible={visible}
+                backdropStyle={styles.backdrop}
+                onBackdropPress={() => setVisible(false)}>
+                <Card disabled={true}>
+                    <View style={{justifyContent: 'center', alignItems: 'center',flexDirection: 'row'}}>
+                        <Icon
+                            style={styles.warnicon}
+                            fill='#ff8800'
+                            name='alert-triangle-outline'
+                        />
+                        <Text style={{marginBottom: 20,}}>Alerta!</Text>
+                    </View>
+                    <Text>Palavra-Passe ou Endereço de Email incorretos.</Text>
+                    <Button style={styles.btnok} onPress={() => setVisible(false)} >
+                        OK
+                    </Button>
+                </Card>
+            </Modal>
         </Layout>
     )
 }
@@ -127,6 +156,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#283739',
         width: '85%',
         marginTop: 25,
+        borderRadius: 50,
+        borderColor: '#000',
+    },
+    backdrop: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    warnicon: {
+        height: 35,
+        width: 35,
+        marginRight: 10,
+        marginBottom: 20,
+    },
+    btnok: {
+        marginTop: 20,
+        backgroundColor: '#283739',
         borderRadius: 50,
         borderColor: '#000',
     },
