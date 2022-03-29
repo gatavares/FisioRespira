@@ -2,6 +2,9 @@ import { TouchableWithoutFeedback, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Avatar, Layout, Text, Button, Input, CheckBox, Icon, TopNavigationAction } from '@ui-kitten/components';
 
+import '../firebase/firebase'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 
 const RegistoPage = () => {
     //inputs variables 
@@ -14,6 +17,7 @@ const RegistoPage = () => {
     const toggleSecureEntry = () => {
         setSecureTextEntry(!secureTextEntry);
     };
+
     const renderIcon = (props) => (
         <TouchableWithoutFeedback onPress={toggleSecureEntry}>
             <Icon {...props} fill='#000000' name={secureTextEntry ? 'eye-off' : 'eye'} />
@@ -26,6 +30,8 @@ const RegistoPage = () => {
     };
 
     const successCheckboxState = useCheckboxState();
+
+    const auth = getAuth();
 
     return (
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -60,15 +66,43 @@ const RegistoPage = () => {
             />
             <CheckBox
                 style={styles.checkbox}
-                status='basic' 
+                status='basic'
                 {...successCheckboxState}>
                 Aceito os termos e condições.
             </CheckBox>
 
-            <Button style={styles.regist} appearance='filled' status='primary'>
+            <Button style={styles.regist} appearance='filled' status='primary' onPress={() => {
+                if (successCheckboxState.checked == true) {
+                    if (valuePass == valuePassConfirm) {
+                        if (valuePass == null || valuePass == '' || valuePassConfirm == null || valuePassConfirm == '' ) {
+                            createUserWithEmailAndPassword(auth, valueEmail, valuePass)
+                                .then((userCredential) => {
+                                    // Signed in
+                                    const user = userCredential.user;
+                                    // ...
+                                })
+                                .catch((error) => {
+                                    const errorCode = error.code;
+                                    const errorMessage = error.message;
+
+                                    console.log(errorCode)
+                                });
+                        }
+                        else {
+                            //modal erro de pass nulas
+                        }
+                    }
+                    else {
+                        //modal erro de pass incoerentes
+                    }
+                }
+                else {
+                    //termos e condicos (checked == false)
+                }
+            }}>
                 Registar
             </Button>
-        </Layout>
+        </Layout >
     )
 }
 
