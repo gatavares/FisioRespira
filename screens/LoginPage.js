@@ -68,6 +68,7 @@ const LoginPage = ({ navigation }) => {
                             setVisible(true)
                             const errorCode = error.code;
                             const errorMessage = error.message;
+                            console.log(errorCode)
                         });
                 }}>
                 Login
@@ -90,18 +91,18 @@ const LoginPage = ({ navigation }) => {
                 visible={visible}
                 backdropStyle={styles.backdrop}
                 onBackdropPress={() => setVisible(false)}>
-                <Card disabled={true}>
+                <Card disabled={true} style={{borderRadius: 15,}}>
                     <View style={{justifyContent: 'center', alignItems: 'center',flexDirection: 'row'}}>
                         <Icon
                             style={styles.warnicon}
                             fill='#ff8800'
                             name='alert-triangle-outline'
                         />
-                        <Text style={{marginBottom: 20,}}>Alerta!</Text>
+                        <Text style={{marginBottom: 20, fontWeight: 'bold',}}>Alerta!</Text>
                     </View>
-                    <Text>Palavra-Passe ou Endereço de Email incorretos.</Text>
+                    <Text >A palavra-passe ou endereço de email incorretos.</Text>
                     <Button style={styles.btnok} onPress={() => setVisible(false)} >
-                        OK
+                        TENTAR NOVAMENTE
                     </Button>
                 </Card>
             </Modal>
