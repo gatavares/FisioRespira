@@ -13,7 +13,7 @@ import LandingPage from './screens/LandingPage';
 import LoginPage from './screens/LoginPage';
 import RegistoPage from './screens/RegistoPage';
 import HomeScreen from './screens/HomeScreen';
-import CacheStorage from './components/CacheStorage';
+//import CacheStorage from './components/CacheStorage';
 
 
 

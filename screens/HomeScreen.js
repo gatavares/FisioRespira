@@ -1,19 +1,39 @@
 import { TouchableWithoutFeedback, StyleSheet, View, StatusBar, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
-import { Avatar, Layout, Text, Button, Input, Icon, MenuItem, OverflowMenu, TopNavigationAction, TopNavigation } from '@ui-kitten/components';
+import { Avatar, Layout, Text, Button, Input, Icon, MenuItem, OverflowMenu, TopNavigationAction, TopNavigation, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 
-
+//top navbar
 const MenuIcon = (props) => (
   <Icon {...props} name='more-vertical' />
 );
-
 const DrawerIcon = (props) => (
   <Icon {...props} name='menu-arrow-outline' />
 );
-
 const LogoutIcon = (props) => (
   <Icon {...props} name='log-out' />
 );
+
+//buttom navbar
+const PersonIcon = (props) => (
+  <Icon {...props} name='person-outline' />
+);
+const HomeIcon = (props) => (
+  <Icon {...props} name='home-outline' />
+);
+const ExercicesIcon = (props) => (
+  <Icon {...props} name='heart-outline' />
+);
+const InfoIcon = (props) => (
+  <Icon {...props} name='people-outline' />
+);
+const FisioIcon = (props) => (
+  <Icon {...props} name='alert-circle-outline' />
+);
+
+const useBottomNavigationState = (initialState = 0) => {
+  const [selectedIndex, setSelectedIndex] = React.useState(initialState);
+  return { selectedIndex, onSelect: setSelectedIndex };
+};
 
 const HomeScreen = ({ navigation }) => {
 
@@ -22,10 +42,11 @@ const HomeScreen = ({ navigation }) => {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
-
   const renderMenuAction = () => (
     <TopNavigationAction icon={MenuIcon} onPress={toggleMenu} />
   );
+
+  const bottomState = useBottomNavigationState();
 
   const renderOverflowMenuAction = () => (
     <React.Fragment>
@@ -49,9 +70,13 @@ const HomeScreen = ({ navigation }) => {
     </View>
   );
 
+  const conteudo = () => {
+
+  }
+
   return (
     <>
-      <SafeAreaView style={styles.NavBar}>
+      <SafeAreaView style={styles.topNavBar}>
         <TopNavigation
           title={renderTitle}
           accessoryRight={renderOverflowMenuAction}
@@ -60,7 +85,7 @@ const HomeScreen = ({ navigation }) => {
 
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ScrollView style={styles.scrollView}>
-          <Text category='s1' style={{fontSize: 22,}}>O QUE É FISIOTERAPIA RESPIRATÓRIA?</Text>
+          <Text category='s1' style={{ fontSize: 22, }}>O QUE É FISIOTERAPIA RESPIRATÓRIA?</Text>
           <Text category='p2' style={styles.text}>
             {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -101,7 +126,20 @@ const HomeScreen = ({ navigation }) => {
             culpa qui officia deserunt mollit anim id est laborum.
           </Text>
         </ScrollView>
+
+        
+
       </Layout>
+      <SafeAreaView style={styles.btmNavBar}>
+          <BottomNavigation style={styles.bottomNavigation} {...bottomState}>
+            <BottomNavigationTab title='INICIO' icon={HomeIcon} />
+            <BottomNavigationTab title='  O QUE SOMOS?' icon={InfoIcon} />
+            <BottomNavigationTab title=' EXERCICIOS ' icon={ExercicesIcon} />
+            <BottomNavigationTab title=' SABER MAIS' icon={FisioIcon} />
+            <BottomNavigationTab title='CONTA' icon={PersonIcon} />
+          </BottomNavigation>
+
+        </SafeAreaView>
     </>
   )
 };
@@ -118,8 +156,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#046f83',
   },
-  NavBar: {
+  topNavBar: {
     marginTop: StatusBar.currentHeight,
+    backgroundColor: '#fff',
+  },
+  btmNavBar: {
+    marginBottom: StatusBar.currentHeight,
     backgroundColor: '#fff',
   },
   scrollView: {
