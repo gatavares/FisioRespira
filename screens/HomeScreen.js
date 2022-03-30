@@ -132,10 +132,10 @@ const HomeScreen = ({ navigation }) => {
       </Layout>
       <SafeAreaView style={styles.btmNavBar}>
           <BottomNavigation style={styles.bottomNavigation} {...bottomState}>
-            <BottomNavigationTab title='INICIO' icon={HomeIcon} />
-            <BottomNavigationTab title='  O QUE SOMOS?' icon={InfoIcon} />
-            <BottomNavigationTab title=' EXERCICIOS ' icon={ExercicesIcon} />
-            <BottomNavigationTab title=' SABER MAIS' icon={FisioIcon} />
+            <BottomNavigationTab title='INICIO' icon={HomeIcon} component={HomeScreen}/>
+            <BottomNavigationTab title='SOBRE NÓS' icon={InfoIcon} />
+            <BottomNavigationTab title='EXERCICIOS' icon={ExercicesIcon} />
+            <BottomNavigationTab title='SABER MAIS' icon={FisioIcon} />
             <BottomNavigationTab title='CONTA' icon={PersonIcon} />
           </BottomNavigation>
 
