@@ -18,7 +18,7 @@ const LoginPage = ({ navigation }) => {
         setSecureTextEntry(!secureTextEntry);
     };
 
-    //visibilidade
+    //visibilidade modal
     const [visible, setVisible] = React.useState(false);
 
     //icons

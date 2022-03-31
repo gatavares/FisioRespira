@@ -13,6 +13,7 @@ import LandingPage from './screens/LandingPage';
 import LoginPage from './screens/LoginPage';
 import RegistoPage from './screens/RegistoPage';
 import HomeScreen from './screens/HomeScreen';
+import TermosPage from './screens/TermosPage';
 //import CacheStorage from './components/CacheStorage';
 
 
@@ -33,6 +34,7 @@ export default function App() {
             <Stack.Screen name="Registar" component={RegistoPage} />
             <Stack.Screen name="Login" component={LoginPage} />
             <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Termos" component={TermosPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </ApplicationProvider>
