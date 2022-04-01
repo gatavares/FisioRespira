@@ -1,13 +1,13 @@
-import { TouchableWithoutFeedback, StyleSheet, View, StatusBar, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import React from 'react'
-import { Avatar, Layout, Text, Button, Input, Icon, MenuItem, OverflowMenu, TopNavigationAction, TopNavigation, BottomNavigation, BottomNavigationTab, Tab } from '@ui-kitten/components';
+import { Layout, Text } from '@ui-kitten/components';
 
 
-const FisioInfoPageRender = () => {
+const FisioPageRender = () => {
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <ScrollView style={styles.scrollView}>
-        <Text category='s1' style={{ fontSize: 22, }}>!!!!!!!!!!!!!!!FISIOTERAPIA RESPIRATÓRIA?</Text>
+        <Text category='s1' style={{ fontSize: 22,}}>INFORMAÇÕES SOBRE FISIOTERAPIA RESPIRATÓRIA?</Text>
         <Text category='p2' style={styles.text}>
           {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -52,7 +52,7 @@ const FisioInfoPageRender = () => {
   )
 }
 
-export default FisioInfoPageRender
+export default FisioPageRender
 
 const styles = StyleSheet.create({
   titleContainer: {

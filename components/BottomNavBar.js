@@ -31,13 +31,12 @@ const BottomNavBar = ({ navigation, state}) => {
         <SafeAreaView style={styles.btmNavBar}>
             <BottomNavigation style={styles.bottomNavigation}
                 selectedIndex={state.index}
-                onSelect = {index => navigation.navigate(state.routeNames[index])}
-             >
+                onSelect = {index => navigation.navigate(state.routeNames[index])}>
                 <BottomNavigationTab title='INICIO' icon={HomeIcon} />
-                {/* <BottomNavigationTab title='SOBRE NÓS' icon={InfoIcon} />
-                <BottomNavigationTab title='EXERCICIOS' icon={ExercicesIcon} /> */}
+                <BottomNavigationTab title='SOBRE NÓS' icon={InfoIcon} />
+                <BottomNavigationTab title='EXERCICIOS' icon={ExercicesIcon} />
                 <BottomNavigationTab title='SABER MAIS' icon={FisioIcon} />
-                {/* <BottomNavigationTab title='CONTA' icon={PersonIcon} /> */}
+                <BottomNavigationTab title='CONTA' icon={PersonIcon} />
             </BottomNavigation>
         </SafeAreaView>
     )

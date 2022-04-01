@@ -2,22 +2,11 @@ import { StyleSheet, ScrollView } from 'react-native'
 import React from 'react'
 import { Layout, Text } from '@ui-kitten/components';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import BottomNavBar from '../components/BottomNavBar';
-import TopNavBar from "../components/TopNavBar"
-
-import ExerciciosPage from './Pages/ExerciciosPage';
-import FisioPage from './Pages/FisioPage';
-import AccPage from './Pages/AccPage';
-import AboutUsPage from './Pages/AboutUsPage';
-
-const Tab = createBottomTabNavigator();
-
-const HomeScreenRender = () => {
+const ExerciciosPageRender = () => {
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <ScrollView style={styles.scrollView}>
-        <Text category='s1' style={{ fontSize: 22, }}>O QUE É FISIOTERAPIA RESPIRATÓRIA?</Text>
+        <Text category='s1' style={{ fontSize: 22, }}>EXERCICIOS</Text>
         <Text category='p2' style={styles.text}>
           {'\n'}Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -62,50 +51,13 @@ const HomeScreenRender = () => {
   )
 }
 
-
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Tab.Navigator
-      tabBar={props => <BottomNavBar {...props} />}
-    >
-      <Tab.Screen name="Inicio" component={HomeScreenRender} 
-      options={{
-        header: () => <TopNavBar titulo="Inicio" />
-      }} />
-      <Tab.Screen name="Sobre Nós" component={AboutUsPage}
-        options={{
-          header: () => <TopNavBar titulo="Sobre Nós" />
-        }}
-      />
-      <Tab.Screen name="Exercicios" component={ExerciciosPage}
-        options={{
-          header: () => <TopNavBar titulo="Exercicios" />
-        }}
-      />
-      <Tab.Screen name="Saber Mais" component={FisioPage}
-        options={{
-          header: () => <TopNavBar titulo="Saber Mais" />
-        }}
-      />
-      <Tab.Screen name="Conta" component={AccPage}
-        options={{
-          header: () => <TopNavBar titulo="Conta" />
-        }}
-      />
-      
-
-    </Tab.Navigator>
-  )
-};
-
-export default HomeScreen
+export default ExerciciosPageRender
 
 const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  
   scrollView: {
     margin: '7%',
   },
