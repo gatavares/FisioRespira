@@ -1,19 +1,17 @@
-import { TouchableWithoutFeedback, StyleSheet, View, StatusBar, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, StatusBar, SafeAreaView } from 'react-native'
 import React from 'react'
-import { Avatar, Layout, Text, Button, Input, Icon, MenuItem, OverflowMenu, TopNavigationAction, TopNavigation, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
+import { Avatar, Icon, MenuItem, OverflowMenu, TopNavigationAction, TopNavigation } from '@ui-kitten/components';
+import { getAuth, signOut } from "firebase/auth";
 
 
 const MenuIcon = (props) => (
     <Icon {...props} name='more-vertical' />
 );
-const DrawerIcon = (props) => (
-    <Icon {...props} name='menu-arrow-outline' />
-);
 const LogoutIcon = (props) => (
     <Icon {...props} name='log-out' />
 );
 
-const TopNavBar = ({ titulo }) => {
+const TopNavBar = ({ titulo, navigation }) => {
     const [menuVisible, setMenuVisible] = React.useState(false);
 
     const toggleMenu = () => {
@@ -29,8 +27,17 @@ const TopNavBar = ({ titulo }) => {
                 anchor={renderMenuAction}
                 visible={menuVisible}
                 onBackdropPress={toggleMenu}>
-                <MenuItem accessoryLeft={DrawerIcon} title='Menu' />
-                <MenuItem accessoryLeft={LogoutIcon} title='Logout' />
+                <MenuItem accessoryLeft={LogoutIcon} title='Logout' 
+                // onPress={() => {
+                //     const auth = getAuth();
+                //     signOut(auth).then(() => {
+                //         navigation.navigate('LandingPage')
+                //     }).catch((error) => {
+                //         const errorCode = error.code;
+                //         console.log(error)
+                //     });
+                // }} 
+                />
             </OverflowMenu>
         </React.Fragment>
     );

@@ -91,7 +91,6 @@ const RegistoPage = ({ navigation }) => {
                             })
                             .catch((error) => {
                                 const errorCode = error.code;
-                                const errorMessage = error.message;
 
                                 console.log(errorCode)
                                 if (errorCode == 'auth/invalid-email' || errorCode == 'auth/missing-email') {
