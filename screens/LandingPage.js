@@ -43,10 +43,6 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         //fontWeight: 'bold',
     },
-    warn: {
-
-    },
-
     login: {
         backgroundColor: '#283739',
         width: '85%',
