@@ -46,7 +46,6 @@ export default BottomNavBar
 
 const styles = StyleSheet.create({
     btmNavBar: {
-        marginBottom: StatusBar.currentHeight,
         backgroundColor: '#fff',
     },
 })
