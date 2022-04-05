@@ -1,10 +1,32 @@
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Layout, Text } from '@ui-kitten/components';
+import { Layout, Text, Icon } from '@ui-kitten/components';
 
-const ExerciciosPageRender = () => {
+
+import {useNavigation } from '@react-navigation/native'
+
+const AccEx = 0
+
+const exerciciosRenderContent0 = () => {
+  const navigation = useNavigation()
+
   return (
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }} >
+      <Text category='s1' style={{fontSize: 20, marginTop: 25, marginBottom: 15, marginLeft: 10, marginRight: 10,}}>INFELIZMENTE NÃO CONSEGUIMOS ATRIBUIR NEUNHUM EXERCICIO!</Text>
+      <Text category='p1' style={{marginLeft: 20, marginRight: 20, fontSize: 15,}}>Para lhe podermos atribuir exercicios tem de adirir ao nosso plano de <Text category='p1' style={{fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 15,}}>acompanhamento personalizado</Text>!</Text>
+      <TouchableOpacity style={{ flexDirection: 'row', marginTop: '50%', marginLeft: '2%', marginRight: '3%' }} onPress={() => {
+        navigation.navigate('LandingPage')
+      }}>
+        <Icon style={styles.icon} fill='#0074cc' name='heart-outline' />
+        <Text category='s1' style={{marginLeft: 15, color: '#0074cc'}}>ADERIR AQUI AO PLANO DE{'\n'}ACOMPANHAMENTO PERSONALIZADO</Text>
+      </TouchableOpacity>
+    </Layout >
+  )
+}
+
+const exerciciosRenderContent1 = () => {
+  return (
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
       <ScrollView style={styles.scrollView}>
         <Text category='s1' style={{ fontSize: 22, }}>EXERCICIOS</Text>
         <Text category='p2' style={styles.text}>
@@ -50,6 +72,18 @@ const ExerciciosPageRender = () => {
     </Layout>
   )
 }
+const ExerciciosPageRender = () => {
+  if (AccEx == 0) {
+    return (
+      exerciciosRenderContent0()
+    )
+  }
+  else {
+    return (
+      exerciciosRenderContent1()    
+    )
+  }
+}
 
 export default ExerciciosPageRender
 
@@ -67,5 +101,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 17,
+  },
+  icon: {
+    width: 30,
+    height: 30,
   },
 })

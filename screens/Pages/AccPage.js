@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Layout, Text, Avatar, Icon, Button } from '@ui-kitten/components';
+import { Layout, Text, Avatar, Icon } from '@ui-kitten/components';
 
 const AccPageRender = () => {
   return (
@@ -45,7 +45,7 @@ const AccPageRender = () => {
         <View style={styles.hairline} />
 
         <View style={{ marginLeft: '7%' }}>
-          <TouchableOpacity style={{ flexDirection: 'row', marginTop: 23 }}>
+          <TouchableOpacity style={{ flexDirection: 'row', marginTop: 30 }}>
             <Icon style={styles.icon} fill='#000' name='heart-outline' />
             <Text category='s1' style={{ marginTop: -3, marginLeft: 15, marginRight: '32%', marginBottom: 6, }}>ADERIR AO PLANO DE ACOMPANHAMENTO</Text>
             <Icon
