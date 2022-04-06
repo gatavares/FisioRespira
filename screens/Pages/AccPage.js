@@ -1,11 +1,11 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Layout, Text, Avatar, Icon } from '@ui-kitten/components';
+import { getAuth, signOut } from "firebase/auth";
 
-const AccPageRender = () => {
+const AccPageRender = ({navigation}) => {
   return (
     <>
-
       <Layout style={{ flex: 1, }}>
         <View style={{ marginLeft: '7%' }}>
           <View style={{ flexDirection: 'row', marginTop: 40 }}>
@@ -75,7 +75,15 @@ const AccPageRender = () => {
 
       <Layout style={{ justifyContent: 'flex-end', alignItems: 'center', }}>
         <TouchableOpacity
-          style={styles.btnLogout}>
+          style={styles.btnLogout}
+          onPress={() => {
+            const auth = getAuth();
+            signOut(auth).then(() => {
+              navigation.navigate('LandingPage')
+            }).catch((error) => {
+              console.log(error)
+            });
+          }}>
           <Icon
             style={styles.iconLogout}
             fill='#ff3d71'

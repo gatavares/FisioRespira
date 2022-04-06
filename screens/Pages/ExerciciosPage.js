@@ -5,7 +5,7 @@ import { Layout, Text, Icon } from '@ui-kitten/components';
 
 import { useNavigation } from '@react-navigation/native'
 
-const AccEx = 0
+const AccEx = 1
 
 const exerciciosRenderContent0 = () => {
   const navigation = useNavigation()
