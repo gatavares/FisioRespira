@@ -5,14 +5,14 @@ import { Layout, Text, Icon } from '@ui-kitten/components';
 
 import { useNavigation } from '@react-navigation/native'
 
-const AccEx = 1
+const AccEx = 0
 
 const exerciciosRenderContent0 = () => {
   const navigation = useNavigation()
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }} >
-      <Text category='s1' style={{ fontSize: 20, marginTop: 25, marginBottom: 15, marginLeft: 10, marginRight: 10, }}>INFELIZMENTE NÃO CONSEGUIMOS ATRIBUIR NEUNHUM EXERCICIO!</Text>
+      <Text category='s1' style={{ fontSize: 20, marginTop: 25, marginBottom: 15, marginRight: 10, }}>INFELIZMENTE NÃO CONSEGUIMOS ATRIBUIR NENHUM EXERCICIO!</Text>
       <Text category='p1' style={{ marginLeft: 20, marginRight: 20, fontSize: 15, }}>Para lhe podermos atribuir exercicios tem de adirir ao nosso plano de <Text category='p1' style={{ fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 15, }}>acompanhamento personalizado</Text>!</Text>
       <TouchableOpacity style={{ flexDirection: 'row', marginTop: '50%', marginLeft: '2%', marginRight: '3%' }} onPress={() => {
         navigation.navigate('LandingPage')
@@ -27,7 +27,7 @@ const exerciciosRenderContent0 = () => {
 const exerciciosRenderContent1 = () => {
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-      <ScrollView style={styles.scrollView}>
+      <ScrollView>
         <View style={{ margin: '7%', }}>
           <Text category='s1' style={{ fontSize: 22, }}>EXERCICIOS</Text>
           <Text category='p2' style={styles.text}>

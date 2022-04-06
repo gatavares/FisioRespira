@@ -8,7 +8,7 @@ export default function LandingPage({ navigation }) {
             <Avatar source={require('../assets/icon.png')}
                 style={styles.logo} />
 
-            <Text category='h6' style={styles.bv}>Bem-vindo(a) à FISIO-RESPIRA</Text>
+            <Text category='h6' style={styles.bv}>Bem-vindo(a) à FisioRespira</Text>
             <Text category='s2' style={styles.warn}>Para aceder à aplicação inicie ou crie uma conta nova.</Text>
 
             <Button style={styles.login} appearance='filled' status='primary'
