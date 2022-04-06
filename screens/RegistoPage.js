@@ -1,4 +1,4 @@
-import { TouchableWithoutFeedback, StyleSheet, View, KeyboardAvoidingView } from 'react-native'
+import { TouchableWithoutFeedback, StyleSheet, View, KeyboardAvoidingView, Platform, Keyboard } from 'react-native'
 import React from 'react'
 import { Avatar, Layout, Text, Button, Input, CheckBox, Icon, TopNavigationAction, Card, Modal, } from '@ui-kitten/components';
 
@@ -43,203 +43,210 @@ const RegistoPage = ({ navigation }) => {
     const auth = getAuth();
 
     return (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Avatar source={require('../assets/icon.png')}
-                style={styles.logo} />
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Avatar source={require('../assets/icon.png')}
+                        style={styles.logo} />
 
-            <Input
-                placeholder='Endereço de Email'
-                status='basic'
-                style={styles.imputEmail}
-                keyboardType="email-address"
-                value={valueEmail}
-                onChangeText={nextValue => setValueEmail(nextValue)}
-            />
-            <Input
-                value={valuePass}
-                placeholder='Palavra-Passe'
-                status='basic'
-                style={styles.imputPass}
-                accessoryRight={renderIcon}
-                secureTextEntry={secureTextEntry}
-                onChangeText={nextValue => setValuePass(nextValue)}
-            />
-            <Input
-                value={valuePassConfirm}
-                placeholder='Confirmar Palavra-Passe'
-                status='basic'
-                style={styles.imputPass}
-                accessoryRight={renderIcon}
-                secureTextEntry={secureTextEntry}
-                onChangeText={nextValue => setValuePassConfirm(nextValue)}
-            />
-            <CheckBox
-                style={styles.checkbox}
-                status='basic'
-                {...successCheckboxState}>
-                Aceito os termos e condições.
-            </CheckBox>
+                    <Input
+                        placeholder='Endereço de Email'
+                        status='basic'
+                        style={styles.imputEmail}
+                        keyboardType="email-address"
+                        value={valueEmail}
+                        onChangeText={nextValue => setValueEmail(nextValue)}
+                    />
+                    <Input
+                        value={valuePass}
+                        placeholder='Palavra-Passe'
+                        status='basic'
+                        style={styles.imputPass}
+                        accessoryRight={renderIcon}
+                        secureTextEntry={secureTextEntry}
+                        onChangeText={nextValue => setValuePass(nextValue)}
+                    />
+                    <Input
+                        value={valuePassConfirm}
+                        placeholder='Confirmar Palavra-Passe'
+                        status='basic'
+                        style={styles.imputPass}
+                        accessoryRight={renderIcon}
+                        secureTextEntry={secureTextEntry}
+                        onChangeText={nextValue => setValuePassConfirm(nextValue)}
+                    />
+                    <CheckBox
+                        style={styles.checkbox}
+                        status='basic'
+                        {...successCheckboxState}>
+                        Aceito os termos e condições.
+                    </CheckBox>
 
-            <Button style={styles.regist} appearance='filled' status='primary' onPress={() => {
-                if (successCheckboxState.checked == true) {
-                    if (valuePass != '' || valuePassConfirm != '') {
-                        createUserWithEmailAndPassword(auth, valueEmail, valuePass)
-                            .then((userCredential) => {
-                                // Signed in
-                                const user = userCredential.user;
-                                setVisibleRegistSuss(true)
-                            })
-                            .catch((error) => {
-                                const errorCode = error.code;
+                    <Button style={styles.regist} appearance='filled' status='primary' onPress={() => {
+                        if (successCheckboxState.checked == true) {
+                            if (valuePass != '' || valuePassConfirm != '') {
+                                createUserWithEmailAndPassword(auth, valueEmail, valuePass)
+                                    .then((userCredential) => {
+                                        // Signed in
+                                        const user = userCredential.user;
+                                        setVisibleRegistSuss(true)
+                                    })
+                                    .catch((error) => {
+                                        const errorCode = error.code;
 
-                                console.log(errorCode)
-                                if (errorCode == 'auth/invalid-email' || errorCode == 'auth/missing-email') {
-                                    setVisibleEmail(true)
-                                }
-                                if (errorCode == 'auth/weak-password') {
-                                    setVisiblePassDif(true)
-                                }
-                                if (errorCode == 'auth/email-already-in-use') {
-                                    setVisibleEmailUsed(true)
-                                }
-                            });
-                    }
-                    else {
-                        //modal erro de pass nulas
-                        setVisibleNull(true)
-                    }
-                }
-                else {
-                    //termos e condicos (checked == false)
-                    setVisibleTermos(true)
-                }
-            }}>
-                Registar
-            </Button>
+                                        console.log(errorCode)
+                                        if (errorCode == 'auth/invalid-email' || errorCode == 'auth/missing-email') {
+                                            setVisibleEmail(true)
+                                        }
+                                        if (errorCode == 'auth/weak-password') {
+                                            setVisiblePassDif(true)
+                                        }
+                                        if (errorCode == 'auth/email-already-in-use') {
+                                            setVisibleEmailUsed(true)
+                                        }
+                                    });
+                            }
+                            else {
+                                //modal erro de pass nulas
+                                setVisibleNull(true)
+                            }
+                        }
+                        else {
+                            //termos e condicos (checked == false)
+                            setVisibleTermos(true)
+                        }
+                    }}>
+                        Registar
+                    </Button>
 
-            <Modal
-                visible={visibleEmailUsed}
-                backdropStyle={styles.backdrop}
-                onBackdropPress={() => setVisibleEmailUsed(false)}>
-                <Card disabled={true} style={{ borderRadius: 15, }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                        <Icon
-                            style={styles.warnicon}
-                            fill='#ff8800'
-                            name='alert-triangle-outline'
-                        />
-                        <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
-                    </View>
-                    <Text >Este endereço de email já foi utilizado, tente recuperar a palavra-passe</Text>
-                    <Button style={styles.btnok} onPress={() => setVisibleEmailUsed(false)} >
-                        TENTAR NOVAMENTE
-                    </Button>
-                </Card>
-            </Modal>
-            <Modal
-                visible={visibleRegistSuss}
-                backdropStyle={styles.backdrop}
-                onBackdropPress={() => setVisibleRegistSuss(false)}>
-                <Card disabled={true} style={{ borderRadius: 15, }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                        <Icon
-                            style={styles.warnicon}
-                            fill='#ff8800'
-                            name='alert-triangle-outline'
-                        />
-                        <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
-                    </View>
-                    <Text >Foi registado com susseço! 🥳Bem-vindo à nossa aplicação de fisioterapia respiratória. {'\n'}A redirecionar para dentro da aplicação.🤗</Text>
-                    <Button style={styles.btnok} onPress={() => setVisibleRegistSuss(false)} >
-                        TENTAR NOVAMENTE
-                    </Button>
-                </Card>
-            </Modal>
-            <Modal
-                visible={visibleEmail}
-                backdropStyle={styles.backdrop}
-                onBackdropPress={() => setVisibleEmail(false)}>
-                <Card disabled={true} style={{ borderRadius: 15, }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                        <Icon
-                            style={styles.warnicon}
-                            fill='#ff8800'
-                            name='alert-triangle-outline'
-                        />
-                        <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
-                    </View>
-                    <Text >Insira um endereço de email válido.</Text>
-                    <Button style={styles.btnok} onPress={() => setVisibleEmail(false)} >
-                        TENTAR NOVAMENTE
-                    </Button>
-                </Card>
-            </Modal>
-            <Modal
-                visible={visibleNull}
-                backdropStyle={styles.backdrop}
-                onBackdropPress={() => setVisibleNull(false)}>
-                <Card disabled={true} style={{ borderRadius: 15, }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                        <Icon
-                            style={styles.warnicon}
-                            fill='#ff8800'
-                            name='alert-triangle-outline'
-                        />
-                        <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
-                    </View>
-                    <Text >Insira uma palavra-passe e confirme-a.</Text>
-                    <Button style={styles.btnok} onPress={() => setVisibleNull(false)} >
-                        TENTAR NOVAMENTE
-                    </Button>
-                </Card>
-            </Modal>
-            <Modal
-                visible={visiblePassDif}
-                backdropStyle={styles.backdrop}
-                onBackdropPress={() => setVisiblePassDif(false)}>
-                <Card disabled={true} style={{ borderRadius: 15, }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                        <Icon
-                            style={styles.warnicon}
-                            fill='#ff8800'
-                            name='alert-triangle-outline'
-                        />
-                        <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
-                    </View>
-                    <Text >As palavra-passe que inseriu não correspondem.</Text>
-                    <Button style={styles.btnok} onPress={() => setVisiblePassDif(false)} >
-                        TENTAR NOVAMENTE
-                    </Button>
-                </Card>
-            </Modal>
-            <Modal
-                visible={visibleTermos}
-                backdropStyle={styles.backdrop}
-                onBackdropPress={() => setVisibleTermos(false)}>
-                <Card disabled={true} style={{ borderRadius: 15, }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                        <Icon
-                            style={styles.warnicon}
-                            fill='#ff8800'
-                            name='alert-triangle-outline'
-                        />
-                        <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text >Para continuar tem de aceitar os termos. Se tiver alguma duvida clique no link em baixo!</Text><Text style={{ textDecorationLine: 'underline', fontStyle: 'italic', color: '#0074cc' }}
-                            onPress={() => {
-                                setVisibleTermos(false)
-                                navigation.navigate('Termos')
-                            }}>
-                            {'\n'}Termos e Condições
-                        </Text>
-                    </View>
-                    <Button style={styles.btnok} onPress={() => setVisibleTermos(false)} >
-                        TENTAR NOVAMENTE
-                    </Button>
-                </Card>
-            </Modal>
-        </Layout >
+                    <Modal
+                        visible={visibleEmailUsed}
+                        backdropStyle={styles.backdrop}
+                        onBackdropPress={() => setVisibleEmailUsed(false)}>
+                        <Card disabled={true} style={{ borderRadius: 15, }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                                <Icon
+                                    style={styles.warnicon}
+                                    fill='#ff8800'
+                                    name='alert-triangle-outline'
+                                />
+                                <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
+                            </View>
+                            <Text >Este endereço de email já foi utilizado, tente recuperar a palavra-passe</Text>
+                            <Button style={styles.btnok} onPress={() => setVisibleEmailUsed(false)} >
+                                TENTAR NOVAMENTE
+                            </Button>
+                        </Card>
+                    </Modal>
+                    <Modal
+                        visible={visibleRegistSuss}
+                        backdropStyle={styles.backdrop}
+                        onBackdropPress={() => setVisibleRegistSuss(false)}>
+                        <Card disabled={true} style={{ borderRadius: 15, }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                                <Icon
+                                    style={styles.warnicon}
+                                    fill='#ff8800'
+                                    name='alert-triangle-outline'
+                                />
+                                <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
+                            </View>
+                            <Text >Foi registado com susseço! 🥳Bem-vindo à nossa aplicação de fisioterapia respiratória. {'\n'}A redirecionar para dentro da aplicação.🤗</Text>
+                            <Button style={styles.btnok} onPress={() => setVisibleRegistSuss(false)} >
+                                TENTAR NOVAMENTE
+                            </Button>
+                        </Card>
+                    </Modal>
+                    <Modal
+                        visible={visibleEmail}
+                        backdropStyle={styles.backdrop}
+                        onBackdropPress={() => setVisibleEmail(false)}>
+                        <Card disabled={true} style={{ borderRadius: 15, }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                                <Icon
+                                    style={styles.warnicon}
+                                    fill='#ff8800'
+                                    name='alert-triangle-outline'
+                                />
+                                <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
+                            </View>
+                            <Text >Insira um endereço de email válido.</Text>
+                            <Button style={styles.btnok} onPress={() => setVisibleEmail(false)} >
+                                TENTAR NOVAMENTE
+                            </Button>
+                        </Card>
+                    </Modal>
+                    <Modal
+                        visible={visibleNull}
+                        backdropStyle={styles.backdrop}
+                        onBackdropPress={() => setVisibleNull(false)}>
+                        <Card disabled={true} style={{ borderRadius: 15, }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                                <Icon
+                                    style={styles.warnicon}
+                                    fill='#ff8800'
+                                    name='alert-triangle-outline'
+                                />
+                                <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
+                            </View>
+                            <Text >Insira uma palavra-passe e confirme-a.</Text>
+                            <Button style={styles.btnok} onPress={() => setVisibleNull(false)} >
+                                TENTAR NOVAMENTE
+                            </Button>
+                        </Card>
+                    </Modal>
+                    <Modal
+                        visible={visiblePassDif}
+                        backdropStyle={styles.backdrop}
+                        onBackdropPress={() => setVisiblePassDif(false)}>
+                        <Card disabled={true} style={{ borderRadius: 15, }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                                <Icon
+                                    style={styles.warnicon}
+                                    fill='#ff8800'
+                                    name='alert-triangle-outline'
+                                />
+                                <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
+                            </View>
+                            <Text >As palavra-passe que inseriu não correspondem.</Text>
+                            <Button style={styles.btnok} onPress={() => setVisiblePassDif(false)} >
+                                TENTAR NOVAMENTE
+                            </Button>
+                        </Card>
+                    </Modal>
+                    <Modal
+                        visible={visibleTermos}
+                        backdropStyle={styles.backdrop}
+                        onBackdropPress={() => setVisibleTermos(false)}>
+                        <Card disabled={true} style={{ borderRadius: 15, }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                                <Icon
+                                    style={styles.warnicon}
+                                    fill='#ff8800'
+                                    name='alert-triangle-outline'
+                                />
+                                <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Erro!</Text>
+                            </View>
+                            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                <Text >Para continuar tem de aceitar os termos. Se tiver alguma duvida clique no link em baixo!</Text><Text style={{ textDecorationLine: 'underline', fontStyle: 'italic', color: '#0074cc' }}
+                                    onPress={() => {
+                                        setVisibleTermos(false)
+                                        navigation.navigate('Termos')
+                                    }}>
+                                    {'\n'}Termos e Condições
+                                </Text>
+                            </View>
+                            <Button style={styles.btnok} onPress={() => setVisibleTermos(false)} >
+                                TENTAR NOVAMENTE
+                            </Button>
+                        </Card>
+                    </Modal>
+                </Layout >
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 }
 
