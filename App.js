@@ -29,7 +29,7 @@ export default function App() {
         <StatusBar style="auto" />
 
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, }}>
+          <Stack.Navigator initialRouteName="LandingPage" screenOptions={{ headerShown: false, }}>
             <Stack.Screen name="LandingPage" component={LandingPage} />
             <Stack.Screen name="Registar" component={RegistoPage} />
             <Stack.Screen name="Login" component={LoginPage} />

@@ -21,10 +21,10 @@ const RegistoPage = ({ navigation }) => {
     const [visibleTermos, setVisibleTermos] = React.useState(false);
     const [visiblePassDif, setVisiblePassDif] = React.useState(false);
     const [visibleNull, setVisibleNull] = React.useState(false);
-    const [visibleEmail, setVisibleEmail] = React.useState(false);    
+    const [visibleEmail, setVisibleEmail] = React.useState(false);
     const [visibleEmailUsed, setVisibleEmailUsed] = React.useState(false);
     const [visibleRegistSuss, setVisibleRegistSuss] = React.useState(false);
-    
+
 
 
     const renderIcon = (props) => (
@@ -116,7 +116,7 @@ const RegistoPage = ({ navigation }) => {
             }}>
                 Registar
             </Button>
-            
+
             <Modal
                 visible={visibleEmailUsed}
                 backdropStyle={styles.backdrop}

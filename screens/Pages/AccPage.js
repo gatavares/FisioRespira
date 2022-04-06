@@ -20,11 +20,11 @@ const AccPageRender = () => {
           <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}>
             <Icon style={styles.icon} fill='#000' name='settings-2-outline' />
             <Text category='s1' style={{ marginTop: 7, marginLeft: 15, marginRight: '25%', marginBottom: 10, }}>INFORMAÇÕES PESSOAIS</Text>
-              <Icon
-                style={styles.iconSeta}
-                fill='#000'
-                name='arrow-ios-forward-outline'
-              />
+            <Icon
+              style={styles.iconSeta}
+              fill='#000'
+              name='arrow-ios-forward-outline'
+            />
           </TouchableOpacity>
         </View>
 
@@ -34,11 +34,11 @@ const AccPageRender = () => {
           <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}>
             <Icon style={styles.icon} fill='#000' name='edit-2-outline' />
             <Text category='s1' style={{ marginTop: 7, marginLeft: 15, marginRight: '46%', marginBottom: 10, }}>EDITAR DADOS</Text>
-              <Icon
-                style={styles.iconSeta}
-                fill='#000'
-                name='arrow-ios-forward-outline'
-              />
+            <Icon
+              style={styles.iconSeta}
+              fill='#000'
+              name='arrow-ios-forward-outline'
+            />
           </TouchableOpacity>
         </View>
 
@@ -62,11 +62,11 @@ const AccPageRender = () => {
           <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}>
             <Icon style={styles.icon} fill='#000' name='question-mark-outline' />
             <Text category='s1' style={{ marginTop: 7, marginLeft: 15, marginRight: '24%', marginBottom: 10, }}>PERGUNTAS FREQUENTES</Text>
-              <Icon
-                style={styles.iconSeta}
-                fill='#000'
-                name='arrow-ios-forward-outline'
-              />
+            <Icon
+              style={styles.iconSeta}
+              fill='#000'
+              name='arrow-ios-forward-outline'
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.hairline} />

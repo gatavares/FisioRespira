@@ -68,10 +68,10 @@ const HomeScreen = ({ navigation }) => {
     <Tab.Navigator
       tabBar={props => <BottomNavBar {...props} />}
     >
-      <Tab.Screen name="Inicio" component={HomeScreenRender} 
-      options={{
-        header: () => <TopNavBar titulo="Inicio" />
-      }} />
+      <Tab.Screen name="Inicio" component={HomeScreenRender}
+        options={{
+          header: () => <TopNavBar titulo="Inicio" />
+        }} />
       <Tab.Screen name="Sobre Nós" component={AboutUsPage}
         options={{
           header: () => <TopNavBar titulo="Sobre Nós" />
@@ -92,7 +92,7 @@ const HomeScreen = ({ navigation }) => {
           header: () => <TopNavBar titulo="Conta" />
         }}
       />
-      
+
 
     </Tab.Navigator>
   )
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  
+
   scrollView: {
     margin: '7%',
   },

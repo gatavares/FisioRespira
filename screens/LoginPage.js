@@ -91,14 +91,14 @@ const LoginPage = ({ navigation }) => {
                 visible={visible}
                 backdropStyle={styles.backdrop}
                 onBackdropPress={() => setVisible(false)}>
-                <Card disabled={true} style={{borderRadius: 15,}}>
-                    <View style={{justifyContent: 'center', alignItems: 'center',flexDirection: 'row'}}>
+                <Card disabled={true} style={{ borderRadius: 15, }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
                         <Icon
                             style={styles.warnicon}
                             fill='#ff8800'
                             name='alert-triangle-outline'
                         />
-                        <Text style={{marginBottom: 20, fontWeight: 'bold',}}>Alerta!</Text>
+                        <Text style={{ marginBottom: 20, fontWeight: 'bold', }}>Alerta!</Text>
                     </View>
                     <Text >A palavra-passe ou endereço de email incorretos.</Text>
                     <Button style={styles.btnok} onPress={() => setVisible(false)} >

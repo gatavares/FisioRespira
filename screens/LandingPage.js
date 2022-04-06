@@ -4,22 +4,22 @@ import { Avatar, Layout, Text, Button } from '@ui-kitten/components';
 
 export default function LandingPage({ navigation }) {
     return (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Avatar source={require('../assets/icon.png')}
                 style={styles.logo} />
-                
+
             <Text category='h6' style={styles.bv}>Bem-vindo(a) à FISIO-RESPIRA</Text>
             <Text category='s2' style={styles.warn}>Para aceder à aplicação inicie ou crie uma conta nova.</Text>
-            
+
             <Button style={styles.login} appearance='filled' status='primary'
-            onPress={() => navigation.navigate('Login')}>
+                onPress={() => navigation.navigate('Login')}>
                 Login
             </Button>
-            <View style={{justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%', flexDirection: 'row'}}>
-            <View style={styles.hairlineL} /><Text category='h6' style={styles.loginButtonBelowText1}>ou</Text><View style={styles.hairlineR} />
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%', flexDirection: 'row' }}>
+                <View style={styles.hairlineL} /><Text category='h6' style={styles.loginButtonBelowText1}>ou</Text><View style={styles.hairlineR} />
             </View>
             <Button style={styles.regist} appearance='filled' status='primary'
-            onPress={() => navigation.navigate('Registar')}>
+                onPress={() => navigation.navigate('Registar')}>
                 Registar
             </Button>
         </Layout>
