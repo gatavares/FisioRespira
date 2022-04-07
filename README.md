@@ -20,7 +20,7 @@ Certifique-se de atualizar os testes conforme apropriado.
 
 # *EN-UK*
 
-# FISIORESPIRA - [APPLICATION OF RESPIRATORY PHYSIOTHERAPY
+# FISIORESPIRA - APPLICATION OF RESPIRATORY PHYSIOTHERAPY
 This is the application that will help you in respiratory physioterapira.
 
 ## Overview
