@@ -14,6 +14,7 @@ import LoginPage from './screens/LoginPage';
 import RegistoPage from './screens/RegistoPage';
 import HomeScreen from './screens/HomeScreen';
 import TermosPage from './screens/TermosPage';
+import Testes from './screens/Test/Testes';
 //import CacheStorage from './components/CacheStorage';
 
 
@@ -29,12 +30,13 @@ export default function App() {
         <StatusBar style="auto" />
 
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, }}>
+          <Stack.Navigator initialRouteName="Testes" screenOptions={{ headerShown: false, }}>
             <Stack.Screen name="LandingPage" component={LandingPage} />
             <Stack.Screen name="Registar" component={RegistoPage} />
             <Stack.Screen name="Login" component={LoginPage} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Termos" component={TermosPage} />
+            <Stack.Screen name="Testes" component={Testes} />
           </Stack.Navigator>
         </NavigationContainer>
       </ApplicationProvider>
