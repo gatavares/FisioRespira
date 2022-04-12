@@ -9,7 +9,7 @@ const Testes = () => {
 
     return (
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-            <Text style={{ marginBottom: 25}} category='h3'>Teste de Video</Text>
+            <Text style={{ marginBottom: 25 }} category='h3'>Teste de Video</Text>
             <Video
                 ref={video}
                 style={styles.video}
