@@ -1,7 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 
-import { StyleSheet, Text, View } from 'react-native';
-
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
@@ -15,6 +13,7 @@ import RegistoPage from './screens/RegistoPage';
 import HomeScreen from './screens/HomeScreen';
 import TermosPage from './screens/TermosPage';
 import Testes from './screens/Test/Testes';
+import Card from './components/CardExResp';
 //import CacheStorage from './components/CacheStorage';
 
 
@@ -30,25 +29,17 @@ export default function App() {
         <StatusBar style="auto" />
 
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Testes" screenOptions={{ headerShown: false, }}>
-            <Stack.Screen name="LandingPage" component={LandingPage} />
-            <Stack.Screen name="Registar" component={RegistoPage} />
-            <Stack.Screen name="Login" component={LoginPage} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Termos" component={TermosPage} />
-            <Stack.Screen name="Testes" component={Testes} />
+          <Stack.Navigator initialRouteName="Home" >
+            <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Registar" component={RegistoPage} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Termos" component={TermosPage} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Testes" component={Testes} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Card" component={Card} options={{ headerShown: false, }}/>
           </Stack.Navigator>
         </NavigationContainer>
       </ApplicationProvider>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -6,10 +6,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomNavBar from '../components/BottomNavBar';
 import TopNavBar from "../components/TopNavBar"
 
-import ExerciciosPage from './Pages/ExerciciosPage';
-import FisioPage from './Pages/FisioPage';
-import AccPage from './Pages/AccPage';
-import AboutUsPage from './Pages/AboutUsPage';
+import ExerciciosPage from './TabScreens/ExerciciosPage';
+import FisioPage from './TabScreens/FisioPage';
+import AccPage from './TabScreens/AccPage';
+import AboutUsPage from './TabScreens/AboutUsPage';
 
 const Tab = createBottomTabNavigator();
 
