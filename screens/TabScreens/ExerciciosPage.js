@@ -5,6 +5,7 @@ import { Layout, Text, Icon, Card, List, } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native'
 
 import ExerResp from '../../components/CardExResp'
+import ExerFisio from '../../components/CardExFisico'
 
 const AccEx = 1
 
@@ -143,7 +144,7 @@ const exerciciosRenderContent1 = () => {
               </TouchableOpacity>
             </View>
           </View>
-          {/* <ExerResp /> */}
+          <ExerFisio />
         </>
       )
     }

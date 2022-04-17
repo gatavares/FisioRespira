@@ -1,3 +1,4 @@
+
 import { StyleSheet, View, Image } from 'react-native'
 import React, { useEffect, useState, useCallback } from 'react'
 import { Layout, Text, Icon, Card, List, } from '@ui-kitten/components';
@@ -6,11 +7,11 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { async } from '@firebase/util';
 
-export default function CardExResp() {
+export default function CardExFisico() {
     const [dados, setdados] = useState([])
 
     async function getDados() {
-        const q = query(collection(db, "ExerciciosResp"));
+        const q = query(collection(db, "ExerciciosFisico"));
 
         const Dados = []
 
@@ -52,11 +53,11 @@ export default function CardExResp() {
             style={styles.cards}
             header={headerProps => renderItemHeader(headerProps, info)}
             onPress={() => {
-                console.log('Dados:\n' + info.item.id)
+                console.log(info.item.id)
                 console.log(info.item.nome)
-                console.log(info.item.desc)
-                console.log(info.item.reps)
-                console.log(info.item.time)
+                console.log(info.item.descricao)
+                console.log(info.item.rep)
+                console.log(info.item.duracao)
                 console.log(info.item.series)
             }}>
             <Image
