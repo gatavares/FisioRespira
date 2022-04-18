@@ -18,7 +18,7 @@ export default function CardExFisico() {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach(
             (ex) => {
-                console.log(ex.id, " => ", ex.data());
+                //console.log(ex.id, " => ", ex.data());
                 Dados.push({
                     id: ex.id,
                     nome: ex.data().nome,
@@ -53,11 +53,11 @@ export default function CardExFisico() {
             style={styles.cards}
             header={headerProps => renderItemHeader(headerProps, info)}
             onPress={() => {
-                console.log(info.item.id)
+                console.log('Dados:\n' + info.item.id)
                 console.log(info.item.nome)
-                console.log(info.item.descricao)
-                console.log(info.item.rep)
-                console.log(info.item.duracao)
+                console.log(info.item.desc)
+                console.log(info.item.reps)
+                console.log(info.item.time)
                 console.log(info.item.series)
             }}>
             <Image
@@ -70,17 +70,38 @@ export default function CardExFisico() {
         </Card>
     );
 
-    return (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <List
-                style={{ backgroundColor: '#fff', maxHeight: '100%', }}
-                contentContainerStyle={styles.contentContainer}
-                data={dados}
-                keyExtractor={(item) => item.id}
-                renderItem={renderItem}
-            />
-        </Layout>
-    )
+    const sEx = () => {
+        return (
+            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text category='h5' status='danger' style={{margin: '7%', marginTop: '-7%'}}>Não tens nenhum exercícios fisicos!</Text>
+            </Layout>
+        )
+    }
+    const cEx = () => {
+        return (
+            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <List
+                    style={{ backgroundColor: '#fff', maxHeight: '100%', }}
+                    contentContainerStyle={styles.contentContainer}
+                    data={dados}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderItem}
+                />
+            </Layout>
+        )
+    }
+
+    if (dados.length === 0) {
+        return (
+            sEx()
+        )
+
+    }
+    else {
+        return (
+            cEx()
+        )
+    }
 }
 
 const styles = StyleSheet.create({

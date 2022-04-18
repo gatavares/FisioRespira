@@ -6,7 +6,9 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { async } from '@firebase/util';
 
-export default function CardExResp() {
+export default function CardExResp(
+    //info.item.nome
+) {
     const [dados, setdados] = useState([])
 
     async function getDados() {
@@ -17,7 +19,7 @@ export default function CardExResp() {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach(
             (ex) => {
-                console.log(ex.id, " => ", ex.data());
+                //console.log(ex.id, " => ", ex.data());
                 Dados.push({
                     id: ex.id,
                     nome: ex.data().nome,
@@ -34,7 +36,7 @@ export default function CardExResp() {
     }
 
     useEffect(() => {
-        getDados().then((dadosReturn) =>{
+        getDados().then((dadosReturn) => {
             setdados(dadosReturn)
         })
     }, [])
@@ -69,17 +71,39 @@ export default function CardExResp() {
         </Card>
     );
 
-    return (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <List
-                style={{ backgroundColor: '#fff', maxHeight: '100%', }}
-                contentContainerStyle={styles.contentContainer}
-                data={dados}
-                keyExtractor={(item) => item.id}
-                renderItem={renderItem}
-            />
-        </Layout>
-    )
+    const sEx = () => {
+        return (
+            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text category='h5' status='danger' style={{ margin: '7%', marginTop: '-7%' }}>Não tens nenhum exercícios de fisioterapia respiratória!</Text>
+            </Layout>
+        )
+    }
+    const cEx = () => {
+        return (
+            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <List
+                    style={{ backgroundColor: '#fff', maxHeight: '100%', }}
+                    contentContainerStyle={styles.contentContainer}
+                    data={dados}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderItem}
+                />
+            </Layout>
+        )
+    }
+
+    if (dados.length === 0) {
+        return (
+            sEx()
+        )
+
+    }
+    else {
+        return (
+            cEx()
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({

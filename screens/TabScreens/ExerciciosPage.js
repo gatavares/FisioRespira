@@ -80,7 +80,7 @@ const exerciciosRenderContent1 = () => {
       else {
         return (
           <>
-            <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: '5%' }}>
+            <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20 }}>
               <View style={{ flexDirection: 'row', }}>
                 <TouchableOpacity
                   style={{ marginRight: 20 }}
@@ -116,7 +116,7 @@ const exerciciosRenderContent1 = () => {
     if (typeEx1 == false || typeEx2 == true) {
       return (
         <>
-          <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: '10%' }}>
+          <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20 }}>
             <View style={{ flexDirection: 'row', }}>
               <TouchableOpacity
                 style={{ marginRight: 20 }}

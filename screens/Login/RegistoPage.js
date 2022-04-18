@@ -2,7 +2,7 @@ import { TouchableWithoutFeedback, StyleSheet, View, KeyboardAvoidingView, Platf
 import React from 'react'
 import { Avatar, Layout, Text, Button, Input, CheckBox, Icon, TopNavigationAction, Card, Modal, } from '@ui-kitten/components';
 
-import '../firebase/firebase'
+import '../../firebase/firebase'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
@@ -49,7 +49,7 @@ const RegistoPage = ({ navigation }) => {
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Avatar source={require('../assets/icon.png')}
+                    <Avatar source={require('../../assets/icon.png')}
                         style={styles.logo} />
 
                     <Input

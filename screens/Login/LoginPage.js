@@ -4,7 +4,7 @@ import { Avatar, Layout, Card, Modal, Text, Button, Input, Icon, TopNavigationAc
 
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import '../firebase/firebase'
+import '../../firebase/firebase'
 
 
 const LoginPage = ({ navigation }) => {
@@ -36,7 +36,7 @@ const LoginPage = ({ navigation }) => {
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Avatar source={require('../assets/icon.png')}
+                    <Avatar source={require('../../assets/icon.png')}
                         style={styles.logo} />
 
                     <Input

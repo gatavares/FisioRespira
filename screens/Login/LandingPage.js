@@ -5,7 +5,7 @@ import { Avatar, Layout, Text, Button } from '@ui-kitten/components';
 export default function LandingPage({ navigation }) {
     return (
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Avatar source={require('../assets/icon.png')}
+            <Avatar source={require('../../assets/icon.png')}
                 style={styles.logo} />
 
             <Text category='h6' style={styles.bv}>Bem-vindo(a) à FisioRespira</Text>
