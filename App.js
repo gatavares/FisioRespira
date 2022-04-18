@@ -14,8 +14,6 @@ import HomeScreen from './screens/HomeScreen';
 import TermosPage from './screens/Pages/TermosPage';
 import Exercicios from './screens/Exercicios/Exercicios';
 import Card from './components/CardExResp';
-//import CacheStorage from './components/CacheStorage';
-
 
 
 const Stack = createNativeStackNavigator();
