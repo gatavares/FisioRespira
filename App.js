@@ -33,8 +33,8 @@ export default function App() {
             <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false, }}/>
             <Stack.Screen name="Registar" component={RegistoPage} options={{ headerShown: false, }}/>
             <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false, }}/>
-            <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false, }}/>
-            <Stack.Screen name="Termos" component={TermosPage} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false, gestureEnabled: false,}}/>
+            <Stack.Screen name="Termos" component={TermosPage} options={{ title: 'Termos e Condições da FisioRespira'}}/>
             <Stack.Screen name="Exercicios" component={Exercicios} options={{title: {}}}/>
             <Stack.Screen name="Card" component={Card} options={{ headerShown: false, }}/>
           </Stack.Navigator>
