@@ -27,7 +27,7 @@ export default function App() {
         <StatusBar style="auto" />
 
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="LandingPage" >
+          <Stack.Navigator initialRouteName="Home" >
             <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false, }}/>
             <Stack.Screen name="Registar" component={RegistoPage} options={{ headerShown: false, }}/>
             <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false, }}/>

@@ -71,14 +71,14 @@ export default function CardExResp(
         </Card>
     );
 
-    const sEx = () => {
+    const withOutEx = () => {
         return (
             <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text category='h5' status='danger' style={{ margin: '7%', marginTop: '-7%' }}>Não tens nenhum exercícios de fisioterapia respiratória!</Text>
             </Layout>
         )
     }
-    const cEx = () => {
+    const withEx = () => {
         return (
             <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <List
@@ -94,13 +94,13 @@ export default function CardExResp(
 
     if (dados.length === 0) {
         return (
-            sEx()
+            withOutEx()
         )
 
     }
     else {
         return (
-            cEx()
+            withEx()
         )
     }
 
