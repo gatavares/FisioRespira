@@ -98,8 +98,6 @@ const HomeScreen = ({ navigation }) => {
           header: () => <TopNavBar titulo="Conta" />
         }}
       />
-
-
     </Tab.Navigator>
   )
 };

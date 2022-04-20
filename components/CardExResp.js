@@ -1,14 +1,12 @@
 import { StyleSheet, View, Image } from 'react-native'
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout, Text, Icon, Card, List, } from '@ui-kitten/components';
 
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { async } from '@firebase/util';
 
-export default function CardExResp(
-    //info.item.nome
-) {
+export default function CardExResp() {
     const [dados, setdados] = useState([])
 
     async function getDados() {

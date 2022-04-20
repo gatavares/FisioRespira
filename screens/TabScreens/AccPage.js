@@ -1,10 +1,35 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout, Text, Avatar, Icon } from '@ui-kitten/components';
+
 import { getAuth, signOut } from "firebase/auth";
+import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { db } from '../../firebase/firebase'
+import { async } from '@firebase/util';
 
 const AccPageRender = ({ navigation, route }) => {
   const params = route.params
+
+  const [dados, setdados] = useState([])
+
+  async function getDados() {
+
+    const docRef = doc(db, "users", "ptr58S57QoVH0gVfZT5Wkyj3d1i1");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      return Dados;
+    }
+    else {
+      console.log("No such document!");
+    }
+  }
+
+  useEffect(() => {
+    getDados().then((dadosReturn) => {
+      setdados(dadosReturn)
+    })
+  }, [])
 
   return (
     <>
