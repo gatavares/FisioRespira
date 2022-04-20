@@ -14,6 +14,7 @@ import HomeScreen from './screens/HomeScreen';
 import TermosPage from './screens/Pages/TermosPage';
 import Exercicios from './screens/Exercicios/Exercicios';
 import Card from './components/CardExResp';
+import InfoPessoal from './screens/Conta/InfoPessoal';
 
 
 const Stack = createNativeStackNavigator();
@@ -32,9 +33,10 @@ export default function App() {
             <Stack.Screen name="Registar" component={RegistoPage} options={{ headerShown: false, }}/>
             <Stack.Screen name="Login" component={LoginPage} options={{ headerShown: false, }}/>
             <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false, gestureEnabled: false,}}/>
-            <Stack.Screen name="Termos" component={TermosPage} options={{ title: 'Termos e Condições da FisioRespira'}}/>
+            <Stack.Screen name="Termos" component={TermosPage} options={{ title: 'Termos e Condições da FisioRespira', headerBackTitle:'Voltar'}}/>
             <Stack.Screen name="Exercicios" component={Exercicios} options={{title: {}}}/>
-            <Stack.Screen name="Card" component={Card} options={{ headerShown: false, }}/>
+            <Stack.Screen name="Card" component={Card} options={{ headerShown: false,}}/>
+            <Stack.Screen name="Infos" component={InfoPessoal} options={{headerBackTitle:'Voltar'}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </ApplicationProvider>

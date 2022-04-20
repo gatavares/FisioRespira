@@ -13,7 +13,7 @@ export default function LandingPage({ navigation }) {
 
             <Button style={styles.login} appearance='filled' status='primary'
                 onPress={() => navigation.navigate('Login')}>
-                Login
+                Autenticar
             </Button>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginStart: '5%', marginEnd: '5%', flexDirection: 'row' }}>
                 <View style={styles.hairlineL} /><Text category='h6' style={styles.loginButtonBelowText1}>ou</Text><View style={styles.hairlineR} />

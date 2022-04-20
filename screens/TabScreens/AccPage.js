@@ -3,7 +3,9 @@ import React from 'react'
 import { Layout, Text, Avatar, Icon } from '@ui-kitten/components';
 import { getAuth, signOut } from "firebase/auth";
 
-const AccPageRender = ({navigation}) => {
+const AccPageRender = ({ navigation, route }) => {
+  const params = route.params
+
   return (
     <>
       <Layout style={{ flex: 1, }}>
@@ -17,7 +19,12 @@ const AccPageRender = ({navigation}) => {
         <View style={styles.hairline} />
 
         <View style={{ marginLeft: '7%' }}>
-          <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}>
+          <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}
+            onPress={() => {
+              navigation.navigate('Infos', {
+                nome: 'Bruno',
+              })
+            }}>
             <Icon style={styles.icon} fill='#000' name='settings-2-outline' />
             <Text category='s1' style={{ marginTop: 7, marginLeft: 15, marginRight: '25%', marginBottom: 10, }}>INFORMAÇÕES PESSOAIS</Text>
             <Icon
