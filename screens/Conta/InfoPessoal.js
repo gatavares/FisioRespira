@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 export default function InfoPessoal({ navigation, route }) {
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Informaçoes de ' + route.params.nome,
+            title: 'Informações de ' + route.params.user,
 
             headerRight: () => (
                 <Button
@@ -17,9 +17,10 @@ export default function InfoPessoal({ navigation, route }) {
             ),
         });
     }, [navigation]);
+
     return (
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Informações Pessoais</Text>
+            <Text>Informações Pessoais de {route.params.nome}</Text>
         </Layout>
     )
 }

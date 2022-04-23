@@ -10,15 +10,27 @@ import { async } from '@firebase/util';
 const AccPageRender = ({ navigation, route }) => {
   const params = route.params
 
-  const [dados, setdados] = useState([])
+  const [userDados, setUserDados] = useState({})
 
-  async function getDados() {
+  async function getUserDados() {
+    //const userDocRef = doc(db, "users", "PSVrWaMoxuhIkoPLI4hR5Nyfa9s1");
+    const userDocRef = doc(db, "users", "ptr58S57QoVH0gVfZT5Wkyj3d1i1");
+    const userDocSnap = await getDoc(userDocRef);
 
-    const docRef = doc(db, "users", "ptr58S57QoVH0gVfZT5Wkyj3d1i1");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      return Dados;
+    if (userDocSnap.exists()) {
+      console.log("Document data:", userDocSnap.data());
+      setUserDados({
+        uid: userDocSnap.id,
+        user: userDocSnap.data().nome,
+        nome: userDocSnap.data().nomeCompleto,
+        img: userDocSnap.data().foto,
+        peso: userDocSnap.data().peso,
+        idade: userDocSnap.data().idade,
+        altura: userDocSnap.data().altura,
+        tipoAcc: userDocSnap.data().tipoAcc,
+        exResp: userDocSnap.data().exResp,
+        exFisic: userDocSnap.data().exFisic,
+      })
     }
     else {
       console.log("No such document!");
@@ -26,18 +38,18 @@ const AccPageRender = ({ navigation, route }) => {
   }
 
   useEffect(() => {
-    getDados().then((dadosReturn) => {
-      setdados(dadosReturn)
-    })
-  }, [])
+    getUserDados();
+  },
+    []
+  )
 
   return (
     <>
       <Layout style={{ flex: 1, }}>
         <View style={{ marginLeft: '7%' }}>
           <View style={{ flexDirection: 'row', marginTop: 40 }}>
-            <Avatar source={require('../../assets/Foto-Bruno.png')} style={styles.foto} />
-            <Text style={{ marginTop: 7, marginLeft: 15, }}>Olá{'\n'}<Text category='s1'>Bruno Santos</Text></Text>
+            <Avatar source={{ uri: userDados.img }} style={styles.foto} />
+            <Text style={{ marginTop: 7, marginLeft: 15, }}>Olá{'\n'}<Text category='s1'>{userDados.nome}</Text></Text>
           </View>
         </View>
 
@@ -46,8 +58,12 @@ const AccPageRender = ({ navigation, route }) => {
         <View style={{ marginLeft: '7%' }}>
           <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}
             onPress={() => {
+              console.log('Uid: ' + userDados.uid)
+              console.log('Ex Fsico: ' + userDados.exFisic)
+              console.log('Ex Resp: ' + userDados.exResp)
               navigation.navigate('Infos', {
-                nome: 'Bruno',
+                user: userDados.user,
+                nome: userDados.nome,
               })
             }}>
             <Icon style={styles.icon} fill='#000' name='settings-2-outline' />
