@@ -14,7 +14,7 @@ const AccPageRender = ({ navigation, route }) => {
 
   async function getUserDados() {
     //const userDocRef = doc(db, "users", "PSVrWaMoxuhIkoPLI4hR5Nyfa9s1");
-    const userDocRef = doc(db, "users", "ptr58S57QoVH0gVfZT5Wkyj3d1i1");
+    const userDocRef = doc(db, "users", route.params.UID);
     const userDocSnap = await getDoc(userDocRef);
 
     if (userDocSnap.exists()) {

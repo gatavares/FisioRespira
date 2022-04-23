@@ -59,7 +59,7 @@ const HomeScreenRender = () => {
           <Text category='s1' style={styles.title}>PARA QUEM É RECOMENDADO E DIRECIONADO?</Text>
           <Text category='p2' style={styles.text}>
             {'\n'}{'\t'}A fisioterapia respiratória pode ser realizada em adultos e na idade pediátrica, como bebes ou crianças.
-            {'\n'}{'\n'}A fisioterapia respiratória pode ser utilizada em pacientes com doença pulmonar obstrutiva crónica, bronquiectasias, 
+            {'\n'}{'\n'}A fisioterapia respiratória pode ser utilizada em pacientes com doença pulmonar obstrutiva crónica, bronquiectasias,
             fibrose cística, bronquelite, no pré e pós-operatório de cirurgia cardiotorácica e abdominal alta, entre outras condições.
           </Text>
         </View>
@@ -69,7 +69,7 @@ const HomeScreenRender = () => {
 }
 
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
   return (
     <Tab.Navigator
       tabBar={props => <BottomNavBar {...props} />}
@@ -94,9 +94,11 @@ const HomeScreen = ({ navigation }) => {
         }}
       />
       <Tab.Screen name="Conta" component={AccPage}
-        options={{
-          header: () => <TopNavBar titulo="Conta" />
-        }}
+        initialParams={{ UID: route.params.UID }}
+      options={{
+        header: () => <TopNavBar titulo="Conta" />
+
+      }}
       />
     </Tab.Navigator>
   )

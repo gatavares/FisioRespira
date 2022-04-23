@@ -1,13 +1,14 @@
 import { TouchableWithoutFeedback, StyleSheet, View, KeyboardAvoidingView, Platform, Keyboard } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar, Layout, Card, Modal, Text, Button, Input, Icon, TopNavigationAction } from '@ui-kitten/components'
 
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 import '../../firebase/firebase'
 
 
-const LoginPage = ({ navigation }) => {
+const LoginPage = ({ navigation, route }) => {
+    const params = route.params
     //inputs variables 
     //valor que esta a ser escrito e sendo atualizado a cada modificacao
     const [valueEmail, setValueEmail] = React.useState('');
@@ -62,12 +63,23 @@ const LoginPage = ({ navigation }) => {
                         onPress={() => {
                             //login firebase
                             const auth = getAuth();
+                            //const [UID, setUID] = React.useState();
                             signInWithEmailAndPassword(auth, valueEmail, valuePass)
                                 .then((userCredential) => {
                                     // Signed in
                                     //Fazer registo na cache da app
+                                    onAuthStateChanged(auth, (user) => {
+                                        if (user) {
+                                            const uid = user.uid;
+                                            console.log(uid)
 
-                                    navigation.navigate('Home')
+                                            navigation.navigate('Home', {
+                                                UID: uid
+                                            })
+                                        } else {
+                                            console.log('Não conseguimos ir buscar nunhum UID da conta')
+                                        }
+                                    });
                                 })
                                 .catch((error) => {
                                     setVisible(true)
