@@ -1,8 +1,13 @@
 import { StyleSheet, ScrollView, TouchableOpacity, TouchableWithoutFeedback, View, Image } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout, Text, Icon, Card, List, } from '@ui-kitten/components';
 
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
+
+import { getAuth, signOut } from "firebase/auth";
+import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { db } from '../../firebase/firebase'
+import { async } from '@firebase/util';
 
 import ExerResp from '../../components/CardExResp'
 import ExerFisio from '../../components/CardExFisico'
@@ -17,7 +22,7 @@ const exerciciosRenderContent0 = () => {
       <Text category='s1' style={{ fontSize: 20, marginTop: 25, marginBottom: 15, marginRight: 10, }}>INFELIZMENTE NÃO CONSEGUIMOS ATRIBUIR NENHUM EXERCICIO!</Text>
       <Text category='p1' style={{ marginLeft: 20, marginRight: 20, fontSize: 15, }}>Para lhe podermos atribuir exercicios tem de adirir ao nosso plano de <Text category='p1' style={{ fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 15, }}>acompanhamento personalizado</Text>!</Text>
       <TouchableOpacity style={{ flexDirection: 'row', marginTop: '50%', marginLeft: '2%', marginRight: '3%' }} onPress={() => {
-        navigation.navigate('LandingPage')
+        navigation.navigate('Conta')
       }}>
         <Icon style={styles.icon} fill='#0074cc' name='heart-outline' />
         <Text category='s1' style={{ marginLeft: 15, color: '#0074cc' }}>ADERIR AQUI AO PLANO DE{'\n'}ACOMPANHAMENTO PERSONALIZADO</Text>
@@ -159,8 +164,43 @@ const exerciciosRenderContent1 = () => {
 }
 
 
-const ExerciciosPageRender = () => {
-  if (AccEx == 0) {
+const ExerciciosPageRender = ({ navigation, route }) => {
+  const params = route.params
+
+  const [userDados, setUserDados] = useState({})
+
+  async function getUserDados() {
+    const userDocRef = doc(db, "users", route.params.UID);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (userDocSnap.exists()) {
+      //console.log("Document data:", userDocSnap.data());
+      setUserDados({
+        uid: userDocSnap.id,
+        user: userDocSnap.data().nome,
+        nome: userDocSnap.data().nomeCompleto,
+        img: `https://avatars.dicebear.com/api/initials/${userDocSnap.data().nomeCompleto}.png`,
+        peso: userDocSnap.data().peso,
+        idade: userDocSnap.data().idade,
+        altura: userDocSnap.data().altura,
+        tipoAcc: userDocSnap.data().tipoAcc,
+        exResp: userDocSnap.data().exResp,
+        exFisic: userDocSnap.data().exFisic,
+      })
+    }
+    else {
+      console.log("Nenhum documento com o UID: " + route.params.UID + " foi encontrado!");
+    }
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getUserDados();
+    }, [])
+  );
+
+
+  if (userDados.tipoAcc == 0) {
     return (
       exerciciosRenderContent0()
     )

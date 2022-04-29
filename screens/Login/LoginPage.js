@@ -71,7 +71,6 @@ const LoginPage = ({ navigation, route }) => {
                                     onAuthStateChanged(auth, (user) => {
                                         if (user) {
                                             const uid = user.uid;
-                                            console.log(uid)
 
                                             navigation.navigate('Home', {
                                                 UID: uid

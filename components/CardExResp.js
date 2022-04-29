@@ -1,13 +1,17 @@
 import { StyleSheet, View, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Layout, Text, Icon, Card, List, } from '@ui-kitten/components';
+import { useNavigation } from '@react-navigation/native';
 
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../firebase/firebase'
 import { async } from '@firebase/util';
 
-export default function CardExResp() {
+export default function CardExResp({ route }) {
     const [dados, setdados] = useState([])
+    const navigation = useNavigation()
+
+    //const params = route.params
 
     async function getDados() {
         const q = query(collection(db, "ExerciciosResp"));
@@ -53,11 +57,17 @@ export default function CardExResp() {
             header={headerProps => renderItemHeader(headerProps, info)}
             onPress={() => {
                 console.log('Dados:\n' + info.item.id)
-                console.log(info.item.nome)
-                console.log(info.item.desc)
-                console.log(info.item.reps)
-                console.log(info.item.time)
-                console.log(info.item.series)
+
+                navigation.navigate('Exer', {
+                    id: info.item.id,
+                    nome: info.item.nome,
+                    desc: info.item.descricao,
+                    img: info.item.img,
+                    vid: info.item.vid,
+                    time: info.item.time,
+                    reps: info.item.reps,
+                    series: info.item.series,
+                })
             }}>
             <Image
                 style={{ height: 200, width: 320, minHeight: 80, minWidth: 150, maxWidth: 320, maxHeight: 200, marginBottom: 15, }}

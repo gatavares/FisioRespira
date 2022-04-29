@@ -1,5 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
 import { Layout, Text, Avatar, Icon } from '@ui-kitten/components';
 
 import { getAuth, signOut } from "firebase/auth";
@@ -13,17 +14,16 @@ const AccPageRender = ({ navigation, route }) => {
   const [userDados, setUserDados] = useState({})
 
   async function getUserDados() {
-    //const userDocRef = doc(db, "users", "PSVrWaMoxuhIkoPLI4hR5Nyfa9s1");
     const userDocRef = doc(db, "users", route.params.UID);
     const userDocSnap = await getDoc(userDocRef);
 
     if (userDocSnap.exists()) {
-      console.log("Document data:", userDocSnap.data());
+      //console.log("Document data:", userDocSnap.data());
       setUserDados({
         uid: userDocSnap.id,
         user: userDocSnap.data().nome,
         nome: userDocSnap.data().nomeCompleto,
-        img: userDocSnap.data().foto,
+        img: `https://avatars.dicebear.com/api/initials/${userDocSnap.data().nomeCompleto}.png`,
         peso: userDocSnap.data().peso,
         idade: userDocSnap.data().idade,
         altura: userDocSnap.data().altura,
@@ -33,22 +33,23 @@ const AccPageRender = ({ navigation, route }) => {
       })
     }
     else {
-      console.log("No such document!");
+      console.log("Nenhum documento com o UID: " + route.params.UID + " foi encontrado!");
     }
   }
 
-  useEffect(() => {
-    getUserDados();
-  },
-    []
-  )
+  useFocusEffect(
+    React.useCallback(() => {
+      getUserDados();
+    }, [])
+  );
+
 
   return (
     <>
       <Layout style={{ flex: 1, }}>
         <View style={{ marginLeft: '7%' }}>
           <View style={{ flexDirection: 'row', marginTop: 40 }}>
-            <Avatar source={{ uri: userDados.img }} style={styles.foto} />
+            <Avatar source={{ uri: `https://avatars.dicebear.com/api/initials/${userDados.nome}.png` }} style={styles.foto} />
             <Text style={{ marginTop: 7, marginLeft: 15, }}>Olá{'\n'}<Text category='s1'>{userDados.nome}</Text></Text>
           </View>
         </View>
@@ -58,12 +59,15 @@ const AccPageRender = ({ navigation, route }) => {
         <View style={{ marginLeft: '7%' }}>
           <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}
             onPress={() => {
-              console.log('Uid: ' + userDados.uid)
-              console.log('Ex Fsico: ' + userDados.exFisic)
-              console.log('Ex Resp: ' + userDados.exResp)
               navigation.navigate('Infos', {
+                uid: userDados.uid,
                 user: userDados.user,
                 nome: userDados.nome,
+                img: userDados.img,
+                peso: userDados.peso.toString(),
+                idade: userDados.idade.toString(),
+                altura: userDados.altura.toString(),
+                tipoAcc: userDados.tipoAcc.toString(),
               })
             }}>
             <Icon style={styles.icon} fill='#000' name='settings-2-outline' />
@@ -76,7 +80,7 @@ const AccPageRender = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.hairline} />
+        {/* <View style={styles.hairline} />
 
         <View style={{ marginLeft: '7%' }}>
           <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}>
@@ -88,7 +92,7 @@ const AccPageRender = ({ navigation, route }) => {
               name='arrow-ios-forward-outline'
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <View style={styles.hairline} />
 
