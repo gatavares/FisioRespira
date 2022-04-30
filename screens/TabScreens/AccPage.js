@@ -26,6 +26,7 @@ const AccPageRender = ({ navigation, route }) => {
         img: `https://avatars.dicebear.com/api/initials/${userDocSnap.data().nomeCompleto}.png`,
         peso: userDocSnap.data().peso,
         idade: userDocSnap.data().idade,
+        dataNasc: userDocSnap.data().DataNasc,
         altura: userDocSnap.data().altura,
         tipoAcc: userDocSnap.data().tipoAcc,
         exResp: userDocSnap.data().exResp,
@@ -49,7 +50,7 @@ const AccPageRender = ({ navigation, route }) => {
       <Layout style={{ flex: 1, }}>
         <View style={{ marginLeft: '7%' }}>
           <View style={{ flexDirection: 'row', marginTop: 40 }}>
-            <Avatar source={{ uri: `https://avatars.dicebear.com/api/initials/${userDados.nome}.png` }} style={styles.foto} />
+            <Avatar source={{ uri: userDados.img }} style={styles.foto} />
             <Text style={{ marginTop: 7, marginLeft: 15, }}>Olá{'\n'}<Text category='s1'>{userDados.nome}</Text></Text>
           </View>
         </View>
@@ -59,6 +60,7 @@ const AccPageRender = ({ navigation, route }) => {
         <View style={{ marginLeft: '7%' }}>
           <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}
             onPress={() => {
+
               navigation.navigate('Infos', {
                 uid: userDados.uid,
                 user: userDados.user,
@@ -66,6 +68,9 @@ const AccPageRender = ({ navigation, route }) => {
                 img: userDados.img,
                 peso: userDados.peso.toString(),
                 idade: userDados.idade.toString(),
+                diaNasc: userDados.dataNasc.Dia.toString(),
+                mesNasc: userDados.dataNasc.Mes.toString(),
+                anoNasc: userDados.dataNasc.Ano.toString(),
                 altura: userDados.altura.toString(),
                 tipoAcc: userDados.tipoAcc.toString(),
               })

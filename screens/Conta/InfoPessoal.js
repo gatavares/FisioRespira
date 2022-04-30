@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
 import { Layout, Text, Avatar, Icon, Input, Button } from '@ui-kitten/components';
 import { doc, getDoc } from "firebase/firestore";
 
@@ -8,7 +9,6 @@ const Edit = (props) => (
     <Icon {...props} name='edit-2-outline' style={[props.style, styles.icon]} />
 );
 
-
 export default function InfoPessoal({ navigation, route }) {
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -16,7 +16,7 @@ export default function InfoPessoal({ navigation, route }) {
 
             headerRight: () => (
                 <Button
-                    style={{ marginRight: -30, marginTop: -3}}
+                    style={{ marginRight: -30, marginTop: -3 }}
                     appearance='ghost'
                     accessoryLeft={Edit}
                     status='primary'
@@ -27,7 +27,9 @@ export default function InfoPessoal({ navigation, route }) {
                             nome: route.params.nome,
                             img: route.params.img,
                             peso: route.params.peso,
-                            idade: route.params.idade,
+                            diaNasc: route.params.diaNasc,
+                            mesNasc: route.params.mesNasc,
+                            anoNasc: route.params.anoNasc,
                             altura: route.params.altura,
                             tipoAcc: route.params.tipoAcc,
                         })
@@ -48,6 +50,30 @@ export default function InfoPessoal({ navigation, route }) {
     const renderYear = () => (
         <Text>ANOS</Text>
     );
+
+    const dataNasc = route.params.diaNasc.toString() + '/' + route.params.mesNasc.toString() + '/' + route.params.anoNasc.toString()
+    var idade = ''
+    const [IDADE, setIdade] = useState('')
+
+    const getAge = () => {
+        var today = new Date();
+        var birthDate = new Date(dataNasc);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        idade = age
+        return age
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getAge()
+            setIdade(idade.toString())
+        }, [])
+    );
+
 
     return (
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -91,8 +117,31 @@ export default function InfoPessoal({ navigation, route }) {
                         <Input
                             style={{ width: 100, }}
                             disabled={true}
-                            placeholder={route.params.idade}
+                            placeholder={IDADE}
                         />
+                    </View>
+                    <View style={{ marginTop: 15}}>
+                        <Text category='h6' style={{ marginTop: 10, marginRight: 21 }}>DATA DE NASCIMENTO: </Text>
+                        <View style={{ flexDirection: 'row', marginTop: 10, }}>
+                            <Input
+                                style={{ width: 100, marginRight: 15 }}
+                                placeholder={route.params.diaNasc}
+                                disabled={true}
+                                textAlign='center'
+                            />
+                            <Input
+                                style={{ width: 100, marginRight: 15 }}
+                                placeholder={route.params.mesNasc}
+                                disabled={true}
+                                textAlign='center'
+                            />
+                            <Input
+                                style={{ width: 150 }}
+                                placeholder={route.params.anoNasc}
+                                disabled={true}
+                                textAlign='center'
+                            />
+                        </View>
                     </View>
                 </View>
             </View>

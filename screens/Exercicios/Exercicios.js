@@ -71,9 +71,10 @@ export default function Exercicios({ navigation, route }) {
                             setReps(reps - 1)
                             console.log('reps: ' + reps)
                             setContagem(5)
-                            /*if (reps === 0){
+                            if (reps === 0){
                                 setStatus(video.current.pauseAsync())
-                            }*/
+                            }
+                            
                         }
                         else {
                             console.log('segundos restantes: ' + contagem)
@@ -93,7 +94,7 @@ export default function Exercicios({ navigation, route }) {
                 ref={video}
                 style={styles.video}
                 source={
-                    //uri: route.params.vid,
+                    //{uri: route.params.vid},
                     require('../../assets/Night.mp4')
                 }
                 useNativeControls
