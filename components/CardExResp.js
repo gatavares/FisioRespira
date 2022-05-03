@@ -26,11 +26,12 @@ export default function CardExResp({ route }) {
                     id: ex.id,
                     nome: ex.data().nome,
                     desc: ex.data().descricao,
+                    tipoEx: ex.data().tipo, 
                     img: ex.data().imagem,
                     vid: ex.data().video,
                     time: ex.data().duracao,
                     reps: ex.data().rep,
-                    series: ex.data().series,
+                    descanso: ex.data().descanso,
                 })
             }
         )
@@ -62,16 +63,21 @@ export default function CardExResp({ route }) {
                     id: info.item.id,
                     nome: info.item.nome,
                     desc: info.item.descricao,
+                    tipoEx: info.item.tipoEx,
                     img: info.item.img,
                     vid: info.item.vid,
                     time: info.item.time,
                     reps: info.item.reps,
-                    series: info.item.series,
+                    descanso: info.item.descanso,
                 })
             }}>
             <Image
                 style={{ height: 200, width: 320, minHeight: 80, minWidth: 150, maxWidth: 320, maxHeight: 200, marginBottom: 15, }}
                 source={{ uri: info.item.img }} />
+            <Text category='s1'>Tipo de Exercício:</Text>
+            <Text>
+                {'\n'}{info.item.tipoEx}{'\n'}{'\n'}
+            </Text>
             <Text category='s1'>Descrição:</Text>
             <Text>
                 {'\n'}{info.item.desc}

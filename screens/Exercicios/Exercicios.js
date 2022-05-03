@@ -34,6 +34,7 @@ export default function Exercicios({ navigation, route }) {
     const [isPlaying, setIsPlaying] = useState(false)
     const [contagem, setContagem] = useState(5)
     const [reps, setReps] = useState(1)
+    const [done, setDone] = useState(false)
 
 
 
@@ -59,32 +60,36 @@ export default function Exercicios({ navigation, route }) {
                     trailStrokeWidth={5}
                     colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
                     colorsTime={[13, 6, 3, 0]}
-                    onComplete={() => ({
-                        shouldRepeat: reps === 0 ? false : true,
-                        delay: 5,
-                    })}
+                    onComplete={() => (
+                        {
+                            shouldRepeat: reps === 0 ? false : true,
+                            delay: 5,
+                        }
+                    )}
 
                     onUpdate={() => {
                         setContagem(contagem - 1)
                         if (contagem === 0) {
+                            setDone(true)
                             console.log('Loop Concluido')
                             setReps(reps - 1)
-                            console.log('reps: ' + reps)
+                            console.log('Reps: ' + reps)
                             setContagem(5)
-                            if (reps === 0){
+                            if (reps === 0) {
                                 setStatus(video.current.pauseAsync())
                             }
-                            
+
                         }
                         else {
-                            console.log('segundos restantes: ' + contagem)
+                            console.log('Segundos restantes: ' + contagem)
+                            setDone(false)
                         }
                     }}
 
                 >
                     {({ remainingTime, color }) => (
-                        <Text style={{ color, fontSize: 23 }}>
-                            {remainingTime + '"'}
+                        <Text style={done == true ? { color, fontSize: 17, textAlign: 'center' } : { color, fontSize: 23 }}>
+                            {done === true ? reps === 0 ? 'Descanço acaba em 5" FIQUE ATENTO!' : 'Exercicio concluido' : remainingTime + '"'}
                         </Text>
                     )}
                 </CountdownCircleTimer>
