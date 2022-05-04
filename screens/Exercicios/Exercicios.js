@@ -32,8 +32,8 @@ export default function Exercicios({ navigation, route }) {
     const video = useRef(null);
     const [status, setStatus] = useState({});
     const [isPlaying, setIsPlaying] = useState(false)
-    const [contagem, setContagem] = useState(5)
-    const [reps, setReps] = useState(1)
+    const [contagem, setContagem] = useState(route.params.time)
+    const [reps, setReps] = useState(route.params.reps)
     const [done, setDone] = useState(false)
 
 
@@ -43,7 +43,7 @@ export default function Exercicios({ navigation, route }) {
     );
 
     const IconContDown = (props) => (
-        <Icon {...props} name={status.isPlaying ? 'pause-circle-outline' : 'play-circle-outline'} style={[props.style, styles.icon]} />
+        <Icon {...props} name={isPlaying ? 'pause-circle-outline' : 'play-circle-outline'} style={[props.style, styles.icon]} />
     );
 
     return (
@@ -53,7 +53,8 @@ export default function Exercicios({ navigation, route }) {
                 <CountdownCircleTimer
                     isPlaying={isPlaying}
                     duration={
-                        5//route.params.time
+                        //5
+                        route.params.time
                     }
                     size={125}
                     strokeWidth={8}
@@ -63,7 +64,7 @@ export default function Exercicios({ navigation, route }) {
                     onComplete={() => (
                         {
                             shouldRepeat: reps === 0 ? false : true,
-                            delay: 5,
+                            delay: route.params.descanso,
                         }
                     )}
 
@@ -71,14 +72,14 @@ export default function Exercicios({ navigation, route }) {
                         setContagem(contagem - 1)
                         if (contagem === 0) {
                             setDone(true)
+                            console.log('Segundos restantes: ' + contagem)
                             console.log('Loop Concluido')
                             setReps(reps - 1)
+                            setContagem(route.params.time)
                             console.log('Reps: ' + reps)
-                            setContagem(5)
                             if (reps === 0) {
                                 setStatus(video.current.pauseAsync())
                             }
-
                         }
                         else {
                             console.log('Segundos restantes: ' + contagem)
@@ -88,8 +89,8 @@ export default function Exercicios({ navigation, route }) {
 
                 >
                     {({ remainingTime, color }) => (
-                        <Text style={done == true ? { color, fontSize: 17, textAlign: 'center' } : { color, fontSize: 23 }}>
-                            {done === true ? reps === 0 ? 'Descanço acaba em 5" FIQUE ATENTO!' : 'Exercicio concluido' : remainingTime + '"'}
+                        <Text style={done == true ? reps === 0 ? { color, fontSize: 18, textAlign: 'center' } : { color, fontSize: 17, textAlign: 'center' } : { color, fontSize: 23 }}>
+                            {done === true ? reps === 0 ? 'Exercicio concluido' : 'Descanço acaba em ' + route.params.descanso + '" FIQUE ATENTO!' : remainingTime + '"'}
                         </Text>
                     )}
                 </CountdownCircleTimer>
@@ -111,10 +112,11 @@ export default function Exercicios({ navigation, route }) {
                 <Button
                     style={styles.button}
                     appearance='outline'
-                    status={status.isPlaying ? 'danger' : 'success'}
+                    status={isPlaying ? 'danger' : 'success'}
                     accessoryLeft={IconContDown}
                     onPress={() => {
-                        { status.isPlaying ? setIsPlaying(prev => !prev) : setIsPlaying(prev => !prev) }
+                        //rever pausa enquato rola o video !!!!!
+                        { status.isPlaying ? setIsPlaying(contagem === 0 ? console.log('nao pausa') : prev => !prev) : setIsPlaying(contagem === 0 ? console.log('nao pausa') : prev => !prev) }
                         { status.isPlaying ? video.current.pauseAsync() : video.current.playAsync() }
                     }}>
                 </Button>
