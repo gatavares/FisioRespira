@@ -35,6 +35,7 @@ export default function Exercicios({ navigation, route }) {
     const [contagem, setContagem] = useState(route.params.time)
     const [reps, setReps] = useState(route.params.reps)
     const [done, setDone] = useState(false)
+    const [pause, setPause] = useState(false)
 
 
 
@@ -70,12 +71,14 @@ export default function Exercicios({ navigation, route }) {
 
                     onUpdate={() => {
                         setContagem(contagem - 1)
+                        setPause(false)
                         if (contagem === 0) {
                             setDone(true)
                             console.log('Segundos restantes: ' + contagem)
                             console.log('Loop Concluido')
                             setReps(reps - 1)
                             setContagem(route.params.time)
+                            setPause(true)
                             console.log('Reps: ' + reps)
                             if (reps === 0) {
                                 setStatus(video.current.pauseAsync())
@@ -116,8 +119,10 @@ export default function Exercicios({ navigation, route }) {
                     accessoryLeft={IconContDown}
                     onPress={() => {
                         //rever pausa enquato rola o video !!!!!
-                        { status.isPlaying ? setIsPlaying(contagem === 0 ? console.log('nao pausa') : prev => !prev) : setIsPlaying(contagem === 0 ? console.log('nao pausa') : prev => !prev) }
-                        { status.isPlaying ? video.current.pauseAsync() : video.current.playAsync() }
+                        
+                        console.log(pause)
+                        { status.isPlaying ? setIsPlaying(pause === true ? console.log('nao pausa') : prev => !prev) : setIsPlaying(pause === true ? console.log('nao pausa') : prev => !prev) }
+                        { status.isPlaying ? pause === true ? video.current.pauseAsync() : video.current.playAsync() : video.current.playAsync() }
                     }}>
                 </Button>
             </View>
