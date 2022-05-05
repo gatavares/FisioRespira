@@ -26,7 +26,7 @@ export default function CardExResp({ route }) {
                     id: ex.id,
                     nome: ex.data().nome,
                     desc: ex.data().descricao,
-                    tipoEx: ex.data().tipo, 
+                    tipoEx: ex.data().tipo,
                     img: ex.data().imagem,
                     vid: ex.data().video,
                     time: ex.data().duracao,
@@ -110,14 +110,12 @@ export default function CardExResp({ route }) {
         return (
             withOutEx()
         )
-
     }
     else {
         return (
             withEx()
         )
     }
-
 }
 
 const styles = StyleSheet.create({

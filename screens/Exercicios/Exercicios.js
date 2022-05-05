@@ -118,11 +118,8 @@ export default function Exercicios({ navigation, route }) {
                     status={isPlaying ? 'danger' : 'success'}
                     accessoryLeft={IconContDown}
                     onPress={() => {
-                        //rever pausa enquato rola o video !!!!!
-                        
-                        console.log(pause)
-                        { status.isPlaying ? setIsPlaying(pause === true ? console.log('nao pausa') : prev => !prev) : setIsPlaying(pause === true ? console.log('nao pausa') : prev => !prev) }
-                        { status.isPlaying ? pause === true ? video.current.pauseAsync() : video.current.playAsync() : video.current.playAsync() }
+                        { status.isPlaying ? setIsPlaying(pause === true ? prev => prev : prev => !prev) : setIsPlaying(pause === true ? prev => prev : prev => !prev) }
+                        { status.isPlaying ? pause === true ? video.current.playAsync() : video.current.pauseAsync() : video.current.playAsync() }
                     }}>
                 </Button>
             </View>

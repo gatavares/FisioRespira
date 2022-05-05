@@ -2,6 +2,7 @@
 import { StyleSheet, View, Image } from 'react-native'
 import React, { useEffect, useState, useCallback } from 'react'
 import { Layout, Text, Icon, Card, List, } from '@ui-kitten/components';
+import { useNavigation } from '@react-navigation/native';
 
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../firebase/firebase'
@@ -9,6 +10,7 @@ import { async } from '@firebase/util';
 
 export default function CardExFisico() {
     const [dados, setdados] = useState([])
+    const navigation = useNavigation()
 
     async function getDados() {
         const q = query(collection(db, "ExerciciosFisico"));
@@ -23,11 +25,12 @@ export default function CardExFisico() {
                     id: ex.id,
                     nome: ex.data().nome,
                     desc: ex.data().descricao,
+                    tipoEx: ex.data().tipo,
                     img: ex.data().imagem,
                     vid: ex.data().video,
                     time: ex.data().duracao,
                     reps: ex.data().rep,
-                    series: ex.data().series,
+                    descanso: ex.data().descanso,
                 })
             }
         )
@@ -35,7 +38,7 @@ export default function CardExFisico() {
     }
 
     useEffect(() => {
-        getDados().then((dadosReturn) =>{
+        getDados().then((dadosReturn) => {
             setdados(dadosReturn)
         })
     }, [])
@@ -54,15 +57,26 @@ export default function CardExFisico() {
             header={headerProps => renderItemHeader(headerProps, info)}
             onPress={() => {
                 console.log('Dados:\n' + info.item.id)
-                console.log(info.item.nome)
-                console.log(info.item.desc)
-                console.log(info.item.reps)
-                console.log(info.item.time)
-                console.log(info.item.series)
+
+                navigation.navigate('Exer', {
+                    id: info.item.id,
+                    nome: info.item.nome,
+                    desc: info.item.descricao,
+                    tipoEx: info.item.tipoEx,
+                    img: info.item.img,
+                    vid: info.item.vid,
+                    time: info.item.time,
+                    reps: info.item.reps,
+                    descanso: info.item.descanso,
+                })
             }}>
             <Image
                 style={{ height: 200, width: 320, minHeight: 80, minWidth: 150, maxWidth: 320, maxHeight: 200, marginBottom: 15, }}
                 source={{ uri: info.item.img }} />
+            <Text category='s1'>Tipo de Exercício:</Text>
+            <Text>
+                {'\n'}{info.item.tipoEx}{'\n'}{'\n'}
+            </Text>
             <Text category='s1'>Descrição:</Text>
             <Text>
                 {'\n'}{info.item.desc}
@@ -73,7 +87,7 @@ export default function CardExFisico() {
     const withOutEx = () => {
         return (
             <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text category='h5' status='danger' style={{margin: '7%', marginTop: '-7%'}}>Não tens nenhum exercícios fisicos!</Text>
+                <Text category='h5' status='danger' style={{ margin: '7%', marginTop: '-7%' }}>Não tens nenhum exercícios fisicos!</Text>
             </Layout>
         )
     }
@@ -95,7 +109,6 @@ export default function CardExFisico() {
         return (
             withOutEx()
         )
-
     }
     else {
         return (
