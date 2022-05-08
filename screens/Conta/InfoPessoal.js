@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import { Layout, Text, Avatar, Icon, Input, Button } from '@ui-kitten/components';
 import { doc, getDoc } from "firebase/firestore";
-import { Alert } from 'react-native-web';
-
 
 
 const Edit = (props) => (
