@@ -1,8 +1,9 @@
 import { StyleSheet, View, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Layout, Text, Avatar, Icon, Input, Button } from '@ui-kitten/components';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { db } from '../../../firebase/firebase'
 
 // const Check = (props) => (
 //     <Icon name='checkmark-circle-outline'
@@ -14,7 +15,14 @@ const Check = (props) => (
 );
 
 export default function Editar({ navigation, route }) {
-    React.useLayoutEffect(() => {
+    const [valueNome, setValueNome] = useState('');
+    const [valuePeso, setValuePeso] = useState('');
+    const [valueAltura, setValueAltura] = useState('');
+    const [valueDia, setValueDia] = useState('');
+    const [valueMes, setValueMes] = useState('');
+    const [valueAno, setValueAno] = useState('');
+
+    useEffect(() => {
         navigation.setOptions({
             title: 'Editar Dados',
 
@@ -25,7 +33,22 @@ export default function Editar({ navigation, route }) {
                     accessoryLeft={Check}
                     status='success'
                     onPress={() => {
-                        alert('Dados guardados! \n*ex*')
+                        const userRefUpdate = doc(db, "users", route.params.uid);
+                        console.log('Nome: ' + valueNome)
+                        console.log('Peso: ' + valuePeso)
+                        console.log('Altura: ' + valueAltura)
+                        console.log('Ano: ' + valueAno)
+                        console.log('Mes: ' + valueMes)
+                        console.log('Dia: ' + valueDia)
+                        // Set the "capital" field of the city 'DC'
+                        // await updateDoc(userRefUpdate, {
+                        //     nomeCompleto: valueNome,
+                        //     peso: valuePeso,
+                        //     altura: valueAltura,
+                        //     DataNasc: { Ano: valueAno, Mes: valueMes, Dia: valueDia }
+                        // });
+
+                        alert('Dados guardados!')
                     }}
                 >
                     Guardar
@@ -33,7 +56,9 @@ export default function Editar({ navigation, route }) {
 
             ),
         });
-    }, [navigation]);
+        console.log('called')
+        setValueAltura(route.params.altura)
+    }, []);
 
     const renderPeso = () => (
         <Text>Kg</Text>
@@ -41,20 +66,6 @@ export default function Editar({ navigation, route }) {
     const renderAlt = () => (
         <Text>M</Text>
     );
-    const renderYear = () => (
-        <Text>ANOS</Text>
-    );
-    const text = () => (
-        <Text>Ola</Text>
-    );
-
-    const [valueNome, setValueNome] = React.useState('');
-    const [valuePeso, setValuePeso] = React.useState('');
-    const [valueAltura, setValueAltura] = React.useState('');
-    const [valueDia, setValueDia] = React.useState('');
-    const [valueMes, setValueMes] = React.useState('');
-    const [valueAno, setValueAno] = React.useState('');
-
 
     const renderCaption = () => {
         return (
@@ -66,7 +77,6 @@ export default function Editar({ navigation, route }) {
         )
     }
     return (
-
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
@@ -80,7 +90,7 @@ export default function Editar({ navigation, route }) {
                 <KeyboardAwareScrollView>
                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: 20 }}>
                         <Text category='h5' style={{ textAlign: 'center', fontWeight: 'bold' }}>Edite aqui as suas {'\n'}Informações Pessoais</Text>
-                        <View style={{}}>
+                        <View>
                             <View style={{ flexDirection: 'row', marginTop: 25, }}>
                                 <Text category='h6' style={{ marginTop: 10, marginRight: 21 }}>NOME: </Text>
                                 <Input

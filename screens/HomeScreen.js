@@ -85,7 +85,7 @@ const HomeScreen = ({ navigation, route }) => {
       />
       <Tab.Screen name="Exercicios" component={ExerciciosPage}
         initialParams={{ UID: "ptr58S57QoVH0gVfZT5Wkyj3d1i1" }}  //by pass login Admin
-        //initialParams={{ UID: "PSVrWaMoxuhIkoPLI4hR5Nyfa9s1"}}  //by pass login GuiAcc
+        //initialParams={{ UID: "PSVrWaMoxuhIkoPLI4hR5Nyfa9s1" }}  //by pass login GuiAcc
         //initialParams={{ UID: route.params.UID }}
         options={{
           header: () => <TopNavBar titulo="Exercicios" />

@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native';
 import { Layout, Text, Avatar, Icon, Input, Button } from '@ui-kitten/components';
 import { doc, getDoc } from "firebase/firestore";
+import { Alert } from 'react-native-web';
+
 
 
 const Edit = (props) => (
@@ -13,31 +15,6 @@ export default function InfoPessoal({ navigation, route }) {
     React.useLayoutEffect(() => {
         navigation.setOptions({
             title: 'Informações de ' + route.params.user,
-
-            headerRight: () => (
-                <Button
-                    style={{ marginRight: -30, marginTop: -3 }}
-                    appearance='ghost'
-                    accessoryLeft={Edit}
-                    status='primary'
-                    onPress={() =>
-                        navigation.navigate('EditAcc', {
-                            uid: route.params.uid,
-                            user: route.params.user,
-                            nome: route.params.nome,
-                            img: route.params.img,
-                            peso: route.params.peso,
-                            diaNasc: route.params.diaNasc,
-                            mesNasc: route.params.mesNasc,
-                            anoNasc: route.params.anoNasc,
-                            altura: route.params.altura,
-                            tipoAcc: route.params.tipoAcc,
-                        })
-                    }
-                >
-                    Editar
-                </Button>
-            ),
         });
     }, [navigation]);
 

@@ -38,9 +38,29 @@ const AccPageRender = ({ navigation, route }) => {
     }
   }
 
+  function editarOnNavigate() {
+    if (route.params.edit === 1) {
+      navigation.navigate('EditAcc', {
+        uid: userDados.uid,
+        user: userDados.user,
+        nome: userDados.nome,
+        img: userDados.img,
+        peso: userDados.peso.toString(),
+        idade: userDados.idade.toString(),
+        diaNasc: userDados.dataNasc.Dia.toString(),
+        mesNasc: userDados.dataNasc.Mes.toString(),
+        anoNasc: userDados.dataNasc.Ano.toString(),
+        altura: userDados.altura.toString(),
+        tipoAcc: userDados.tipoAcc.toString(),
+      })
+    }
+  }
+
   useFocusEffect(
     React.useCallback(() => {
+      console.log(route.params.edit)
       getUserDados();
+      editarOnNavigate();
     }, [])
   );
 
@@ -85,10 +105,25 @@ const AccPageRender = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
 
-        {/* <View style={styles.hairline} />
+        <View style={styles.hairline} />
 
         <View style={{ marginLeft: '7%' }}>
-          <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}>
+          <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20 }}
+            onPress={() => {
+              navigation.navigate('EditAcc', {
+                uid: userDados.uid,
+                user: userDados.user,
+                nome: userDados.nome,
+                img: userDados.img,
+                peso: userDados.peso.toString(),
+                idade: userDados.idade.toString(),
+                diaNasc: userDados.dataNasc.Dia.toString(),
+                mesNasc: userDados.dataNasc.Mes.toString(),
+                anoNasc: userDados.dataNasc.Ano.toString(),
+                altura: userDados.altura.toString(),
+                tipoAcc: userDados.tipoAcc.toString(),
+              })
+            }}>
             <Icon style={styles.icon} fill='#000' name='edit-2-outline' />
             <Text category='s1' style={{ marginTop: 7, marginLeft: 15, marginRight: '46%', marginBottom: 10, }}>EDITAR DADOS</Text>
             <Icon
@@ -97,7 +132,7 @@ const AccPageRender = ({ navigation, route }) => {
               name='arrow-ios-forward-outline'
             />
           </TouchableOpacity>
-        </View> */}
+        </View>
 
         <View style={styles.hairline} />
 
