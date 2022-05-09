@@ -5,10 +5,6 @@ import { Layout, Text, Avatar, Icon, Input, Button } from '@ui-kitten/components
 import { doc, getDoc } from "firebase/firestore";
 
 
-const Edit = (props) => (
-    <Icon {...props} name='edit-2-outline' style={[props.style, styles.icon]} />
-);
-
 export default function InfoPessoal({ navigation, route }) {
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -95,7 +91,7 @@ export default function InfoPessoal({ navigation, route }) {
                             placeholder={IDADE}
                         />
                     </View>
-                    <View style={{ marginTop: 15}}>
+                    <View style={{ marginTop: 15 }}>
                         <Text category='h6' style={{ marginTop: 10, marginRight: 21 }}>DATA DE NASCIMENTO: </Text>
                         <View style={{ flexDirection: 'row', marginTop: 10, }}>
                             <Input

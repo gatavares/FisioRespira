@@ -5,10 +5,6 @@ import { doc, updateDoc } from "firebase/firestore";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { db } from '../../../firebase/firebase'
 
-// const Check = (props) => (
-//     <Icon name='checkmark-circle-outline'
-//         fill="#00e096" />
-// );
 
 const Check = (props) => (
     <Icon {...props} name='checkmark-circle-outline' style={[props.style, styles.icon]} />
@@ -40,7 +36,8 @@ export default function Editar({ navigation, route }) {
                         console.log('Ano: ' + valueAno)
                         console.log('Mes: ' + valueMes)
                         console.log('Dia: ' + valueDia)
-                        // Set the "capital" field of the city 'DC'
+
+
                         // await updateDoc(userRefUpdate, {
                         //     nomeCompleto: valueNome,
                         //     peso: valuePeso,
