@@ -1,47 +1,70 @@
 import { StyleSheet, View, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Layout, Text, Icon, Card, List, } from '@ui-kitten/components';
+import { Layout, Text, Icon, Card, List, Spinner } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from '../firebase/firebase'
-import { async } from '@firebase/util';
+import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { db, auth } from '../firebase/firebase'
 
-export default function CardExResp({ route }) {
-    const [dados, setdados] = useState([])
+
+/*
+
+    id: getExerciciosSnap.id,
+    nome: getExerciciosSnap.data().nome,
+    desc: getExerciciosSnap.data().descricao,
+    tipoEx: getExerciciosSnap.data().tipo,
+    img: getExerciciosSnap.data().imagem,
+    vid: getExerciciosSnap.data().video,
+    time: getExerciciosSnap.data().duracao,
+    reps: getExerciciosSnap.data().rep,
+    descanso: getExerciciosSnap.data().descanso,
+
+*/
+
+
+
+export default function CardExResp({ uid }) {
+
     const navigation = useNavigation()
+    const [dados, setdados] = useState([])
 
-    //const params = route.params
+    const [loaded, setLoaded] = useState(false)
 
-    async function getDados() {
-        const q = query(collection(db, "ExerciciosResp"));
 
-        const Dados = []
 
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach(
-            (ex) => {
-                //console.log(ex.id, " => ", ex.data());
-                Dados.push({
-                    id: ex.id,
-                    nome: ex.data().nome,
-                    desc: ex.data().descricao,
-                    tipoEx: ex.data().tipo,
-                    img: ex.data().imagem,
-                    vid: ex.data().video,
-                    time: ex.data().duracao,
-                    reps: ex.data().rep,
-                    descanso: ex.data().descanso,
+
+    async function getRespExercises() {
+        try {
+            let exercises = []
+            const exerciseQuery = await query(collection(db, "ExerciciosResp"), where("users", "array-contains", auth.currentUser.uid))
+            const exerciseSnap = await getDocs(exerciseQuery)
+
+            exerciseSnap.forEach((getExerciciosSnap) => {
+                exercises.push({
+                    id: getExerciciosSnap.id,
+                    nome: getExerciciosSnap.data().nome,
+                    desc: getExerciciosSnap.data().descricao,
+                    tipoEx: getExerciciosSnap.data().tipo,
+                    img: getExerciciosSnap.data().imagem,
+                    vid: getExerciciosSnap.data().video,
+                    time: getExerciciosSnap.data().duracao,
+                    reps: getExerciciosSnap.data().rep,
+                    descanso: getExerciciosSnap.data().descanso,
+
                 })
-            }
-        )
-        return Dados
+            })
+            return exercises
+        } catch (error) {
+
+        }
     }
 
     useEffect(() => {
-        getDados().then((dadosReturn) => {
-            setdados(dadosReturn)
+        loaded || getRespExercises().then((exes) => {
+            setdados(exes)
+            setLoaded(true)
         })
+
     }, [])
 
 
@@ -51,7 +74,8 @@ export default function CardExResp({ route }) {
                 {info.item.nome}
             </Text>
         </View>
-    );
+    )
+
     const renderItem = (info) => (
         <Card
             style={styles.cards}
@@ -85,37 +109,28 @@ export default function CardExResp({ route }) {
         </Card>
     );
 
-    const withOutEx = () => {
-        return (
-            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text category='h5' status='danger' style={{ margin: '7%', marginTop: '-7%' }}>Não tens nenhum exercícios de fisioterapia respiratória!</Text>
-            </Layout>
-        )
-    }
-    const withEx = () => {
-        return (
-            <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    // const withOutEx = () => {
+    //     return (
+    //         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //             <Text category='h5' status='danger' style={{ margin: '7%', marginTop: '-7%' }}>Não tens nenhum exercícios de fisioterapia respiratória!</Text>
+    //         </Layout>
+    //     )
+    // }
+    // const withEx = () => {
+    return (
+        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            {loaded ?
                 <List
                     style={{ backgroundColor: '#fff', maxHeight: '100%', }}
                     contentContainerStyle={styles.contentContainer}
                     data={dados}
                     keyExtractor={(item) => item.id}
                     renderItem={renderItem}
-                />
-            </Layout>
-        )
-    }
+                /> : <Spinner />}
+        </Layout>
+    )
 
-    if (dados.length === 0) {
-        return (
-            withOutEx()
-        )
-    }
-    else {
-        return (
-            withEx()
-        )
-    }
+
 }
 
 const styles = StyleSheet.create({

@@ -14,7 +14,7 @@ import ExerFisio from '../../components/CardExFisico'
 
 const AccEx = 1
 
-const exerciciosRenderContent0 = () => {
+const ExerciciosRenderContent0 = () => {
   const navigation = useNavigation()
 
   return (
@@ -31,25 +31,26 @@ const exerciciosRenderContent0 = () => {
   )
 }
 
-const exerciciosRenderContent1 = () => {
-  function MenuTypeEx() {
-    const [typeExVisible, settypeExVisible] = React.useState(true);
-    const [typeEx1, settypeEx1] = React.useState(true);
-    const [typeEx2, settypeEx2] = React.useState(false);
 
-    function TextSelecMenu() {
+function ExerciciosRenderContent1({ route }) {
+  const [typeExVisible, settypeExVisible] = React.useState(true);
+  const [typeEx1, settypeEx1] = React.useState(true);
+  const [typeEx2, settypeEx2] = React.useState(false);
+
+  function TextSelecMenu() {
+    return (
+      <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
+        <Text category='s1' style={{ marginBottom: 15, }}>SELECIONE O TIPO DE EXERCICIOS QUE DESEJA.</Text>
+      </View>
+    )
+  }
+
+  if (typeEx1 == true || typeEx2 == false) {
+    if (typeExVisible == true) {
       return (
-        <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
-          <Text category='s1' style={{ marginBottom: 15, }}>SELECIONE O TIPO DE EXERCICIOS QUE DESEJA.</Text>
-        </View>
-      )
-    }
-
-    if (typeEx1 == true || typeEx2 == false) {
-      if (typeExVisible == true) {
-        return (
-          <>
-            <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20, }}>
+        <>
+          <Layout>
+            <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20 }}>
               <TextSelecMenu />
               <View style={{ flexDirection: 'row', }}>
                 <TouchableOpacity
@@ -78,13 +79,15 @@ const exerciciosRenderContent1 = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            <ExerResp />
-          </>
-        )
-      }
-      else {
-        return (
-          <>
+          </Layout>
+          <ExerResp uid={route.params.UID} />
+        </>
+      )
+    }
+    else {
+      return (
+        <>
+          <Layout>
             <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20 }}>
               <View style={{ flexDirection: 'row', }}>
                 <TouchableOpacity
@@ -113,14 +116,16 @@ const exerciciosRenderContent1 = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            <ExerResp />
-          </>
-        )
-      }
+          </Layout>
+          <ExerResp uid={route.params.UID} />
+        </>
+      )
     }
-    if (typeEx1 == false || typeEx2 == true) {
-      return (
-        <>
+  }
+  if (typeEx1 == false || typeEx2 == true) {
+    return (
+      <>
+        <Layout>
           <View style={{ justifyContent: 'flex-start', alignItems: 'center', marginBottom: 20 }}>
             <View style={{ flexDirection: 'row', }}>
               <TouchableOpacity
@@ -149,22 +154,17 @@ const exerciciosRenderContent1 = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <ExerFisio />
-        </>
-      )
-    }
+        </Layout>
+        <ExerFisio />
+      </>
+    )
   }
-
-
-  return (
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
-      <MenuTypeEx />
-    </Layout>
-  )
 }
 
 
-const ExerciciosPageRender = ({ navigation, route }) => {
+
+
+const ExerciciosPageRender = ({ route }) => {
   const params = route.params
 
   const [userDados, setUserDados] = useState({})
@@ -202,12 +202,12 @@ const ExerciciosPageRender = ({ navigation, route }) => {
 
   if (userDados.tipoAcc == 0) {
     return (
-      exerciciosRenderContent0()
+      <ExerciciosRenderContent0 />
     )
   }
   else {
     return (
-      exerciciosRenderContent1()
+      <ExerciciosRenderContent1 route={route}/>
     )
   }
 }

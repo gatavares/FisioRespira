@@ -58,7 +58,6 @@ const AccPageRender = ({ navigation, route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log(route.params.edit)
       getUserDados();
       editarOnNavigate();
     }, [])
