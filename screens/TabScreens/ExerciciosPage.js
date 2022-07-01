@@ -40,7 +40,7 @@ function ExerciciosRenderContent1({ route }) {
   function TextSelecMenu() {
     return (
       <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
-        <Text category='s1' style={{ marginBottom: 15, }}>SELECIONE O TIPO DE EXERCICIOS QUE DESEJA.</Text>
+        <Text category='s1' style={{ marginBottom: 15, }}>SELECIONE O TIPO DE EXERCÍCIOS QUE DESEJA.</Text>
       </View>
     )
   }
@@ -74,7 +74,7 @@ function ExerciciosRenderContent1({ route }) {
                   }}>
                   <Text
                     style={{ textAlign: 'center', fontSize: 19, }}>
-                    Exercicios{'\n'}Fisicos
+                    Exercícios{'\n'}Físicos
                   </Text>
                 </TouchableOpacity>
               </View>
