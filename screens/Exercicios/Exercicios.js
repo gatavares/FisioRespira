@@ -93,7 +93,7 @@ export default function Exercicios({ navigation, route }) {
                 >
                     {({ remainingTime, color }) => (
                         <Text style={done == true ? reps === 0 ? { color, fontSize: 18, textAlign: 'center' } : { color, fontSize: 17, textAlign: 'center' } : { color, fontSize: 23 }}>
-                            {done === true ? reps === 0 ? 'Exercicio concluido' : 'Descanço acaba em ' + route.params.descanso + '" FIQUE\nATENTO!' : remainingTime + '"'}
+                            {done === true ? reps === 0 ? 'Exercício concluído' : 'Descanso acaba em ' + route.params.descanso + '" FIQUE\nATENTO!' : remainingTime + '"'}
                         </Text>
                     )}
                 </CountdownCircleTimer>
