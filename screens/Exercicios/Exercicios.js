@@ -103,8 +103,8 @@ export default function Exercicios({ navigation, route }) {
                 ref={video}
                 style={styles.video}
                 source={
-                    //{uri: route.params.vid},
-                    require('../../assets/Night.mp4')
+                    {uri: route.params.vid}
+                    //require('../../assets/Night.mp4')
                 }
                 useNativeControls
                 resizeMode="contain"
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     video: {
         alignSelf: 'center',
         width: '95%',
-        height: '25%',
+        height: '27.5%',
     },
     button: {
         marginTop: 120,

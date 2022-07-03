@@ -20,11 +20,10 @@ const HomeScreenRender = () => {
         <View style={{ margin: '7%', }}>
           <Text category='s1' style={{ fontSize: 22, }}>O QUE É FISIOTERAPIA RESPIRATÓRIA?</Text>
           <Text category='p2' style={styles.text}>
-            {'\n'}{'\t'}O Programa de Reabilitação Respiratória é um tratamento médico multidimensional implementado por uma equipa multiprofissional
-            e multidisciplinar para pacientes com doenças respiratórias crônicas sintomáticas. {'\n'}{'\n'}Inclui estratégias abrangentes e
-            individualizadas para cada paciente com o objetivo de reduzir a dispneia (falta de ar) e melhorar a respiração,
-            aumentar a tolerância ao esforço, o engajamento social e a qualidade de vida, além de reduzir os custos de saúde.
-            E reduzir uma série de fatores que contribuem para a evolução natural da doença.
+            {'\n'}{'\t'}O Programa de Reabilitação Respiratória é um tratamento médico multidimensional implementado por uma equipa multiprofissional e 
+            multidisciplinar para pacientes com doenças respiratórias crónicas sintomáticas. {'\n'}{'\n'}Inclui estratégias abrangentes e individualizadas 
+            para cada paciente com o objetivo de reduzir a dispneia (falta de ar) e melhorar a respiração, aumentar a tolerância ao esforço e a qualidade de vida, 
+            além de reduzir os custos de saúde assim como uma série de fatores que contribuem para a evolução natural da doença.
           </Text>
 
 
@@ -88,7 +87,7 @@ const HomeScreen = ({ navigation, route }) => {
         //initialParams={{ UID: "PSVrWaMoxuhIkoPLI4hR5Nyfa9s1" }}  //by pass login GuiAcc
         //initialParams={{ UID: route.params.UID }}
         options={{
-          header: () => <TopNavBar titulo="Exercicios" />
+          header: () => <TopNavBar titulo="Exercícios" />
         }}
       />
       <Tab.Screen name="Saber Mais" component={FisioPage}

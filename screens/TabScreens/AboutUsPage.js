@@ -41,7 +41,7 @@ const AboutUsPageRender = () => {
             tratadas através de fisioterapia respiratória.
           </Text>
 
-          <Text category='s1' style={styles.title}>EQUIPA</Text>
+          {/* <Text category='s1' style={styles.title}>EQUIPA</Text>
           <Layout style={{ flexDirection: 'row' }}>
             <Card style={styles.card} header={HeaderGui}>
               <Avatar source={require('../../assets/Foto-Gui.png')}
@@ -67,7 +67,7 @@ const AboutUsPageRender = () => {
                 shape='square'
                 style={styles.fotos} />
             </Card>
-          </Layout>
+          </Layout> */}
         </View>
       </ScrollView>
     </Layout>
