@@ -23,7 +23,7 @@ import { db, auth } from '../firebase/firebase'
 
 
 
-export default function CardExResp({ uid }) {
+export default function CardExResp() {
 
     const navigation = useNavigation()
     const [dados, setdados] = useState([])
