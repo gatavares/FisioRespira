@@ -93,7 +93,7 @@ export default function Exercicios({ navigation, route }) {
                 >
                     {({ remainingTime, color }) => (
                         <Text style={done == true ? reps === 0 ? { color, fontSize: 18, textAlign: 'center' } : { color, fontSize: 17, textAlign: 'center' } : { color, fontSize: 23 }}>
-                            {done === true ? reps === 0 ? 'Exercicio concluido' : 'Descanço acaba em ' + route.params.descanso + '" FIQUE\nATENTO!' : remainingTime + '"'}
+                            {done === true ? reps === 0 ? 'Exercício concluído' : 'Descanso acaba em ' + route.params.descanso + '" FIQUE\nATENTO!' : remainingTime + '"'}
                         </Text>
                     )}
                 </CountdownCircleTimer>
@@ -103,8 +103,8 @@ export default function Exercicios({ navigation, route }) {
                 ref={video}
                 style={styles.video}
                 source={
-                    //{uri: route.params.vid},
-                    require('../../assets/Night.mp4')
+                    {uri: route.params.vid}
+                    //require('../../assets/Night.mp4')
                 }
                 useNativeControls
                 resizeMode="contain"
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     video: {
         alignSelf: 'center',
         width: '95%',
-        height: '25%',
+        height: '27.5%',
     },
     button: {
         marginTop: 120,

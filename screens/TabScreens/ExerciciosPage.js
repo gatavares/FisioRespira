@@ -19,7 +19,7 @@ const ExerciciosRenderContent0 = () => {
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }} >
-      <Text category='s1' style={{ fontSize: 20, marginTop: 25, marginBottom: 15, marginRight: 10, }}>INFELIZMENTE NÃO CONSEGUIMOS ATRIBUIR NENHUM EXERCICIO!</Text>
+      <Text category='s1' style={{ fontSize: 20, marginTop: 25, marginBottom: 15, marginRight: 10, }}>INFELIZMENTE NÃO CONSEGUIMOS ATRIBUIR NENHUM EXERCÍCIO!</Text>
       <Text category='p1' style={{ marginLeft: 20, marginRight: 20, fontSize: 15, }}>Para lhe podermos atribuir exercicios tem de adirir ao nosso plano de <Text category='p1' style={{ fontWeight: 'bold', textDecorationLine: 'underline', fontSize: 15, }}>acompanhamento personalizado</Text>!</Text>
       <TouchableOpacity style={{ flexDirection: 'row', marginTop: '50%', marginLeft: '2%', marginRight: '3%' }} onPress={() => {
         navigation.navigate('Conta')
@@ -40,7 +40,7 @@ function ExerciciosRenderContent1({ route }) {
   function TextSelecMenu() {
     return (
       <View style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
-        <Text category='s1' style={{ marginBottom: 15, }}>SELECIONE O TIPO DE EXERCICIOS QUE DESEJA.</Text>
+        <Text category='s1' style={{ marginBottom: 15, }}>SELECIONE O TIPO DE EXERCÍCIOS QUE DESEJA.</Text>
       </View>
     )
   }
@@ -74,7 +74,7 @@ function ExerciciosRenderContent1({ route }) {
                   }}>
                   <Text
                     style={{ textAlign: 'center', fontSize: 19, }}>
-                    Exercicios{'\n'}Fisicos
+                    Exercícios{'\n'}Físicos
                   </Text>
                 </TouchableOpacity>
               </View>
