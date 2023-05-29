@@ -1,3 +1,6 @@
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
+
 import { StatusBar } from 'expo-status-bar';
 
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
